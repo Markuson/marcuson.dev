@@ -1,0 +1,47 @@
+{
+  "title": "Sobre Mi",
+  "subtitle": "Un desenvolupador apassionat que connecta els mons digital i físic a través del codi, la IA i la creació pràctica.",
+  "skills": {
+    "frontend": ["React", "TypeScript", "Tailwind CSS", "Next.js"],
+    "mobile": ["React Native", "Integració IoT", "Bluetooth/WiFi", "Mòduls Natius"],
+    "backend": ["Node.js", "Python", "PostgreSQL", "APIs"],
+    "aiml": ["OpenAI", "LangChain", "TensorFlow", "Hugging Face"],
+    "making": ["Impressió 3D", "Arduino", "Electrònica", "Robòtica"]
+  },
+  "experience": [
+    {
+      "role": "Desenvolupador Full-Stack Senior",
+      "company": "Tech Innovations Inc.",
+      "period": "2022–Present",
+      "description": "Liderant aplicacions web potenciades per IA i metodologies de vibecoding.",
+      "highlights": [
+        "Vaig desenvolupar eines de desenvolupament potenciades per IA augmentant la productivitat de l'equip en un 40%",
+        "Vaig liderar la implementació d'aplicacions React Native IoT per a manufactura intel·ligent"
+      ]
+    },
+    {
+      "role": "Desenvolupador IoT Mòbil",
+      "company": "Digital Solutions Ltd.",
+      "period": "2019–2022",
+      "description": "React Native amb dispositius hardware i sensors.",
+      "highlights": [
+        "Vaig construir aplicacions mòbils multiplataforma controlant xarxes IoT industrials",
+        "Vaig implementar visualització de dades en temps real per a panells de monitoratge de sensors"
+      ]
+    },
+    {
+      "role": "Desenvolupador React Native",
+      "company": "Autònom",
+      "period": "2018–2019",
+      "description": "Solucions mòbils personalitzades connectant IoT a interfícies intuïtives.",
+      "highlights": [
+        "Vaig lliurar més de 8 aplicacions mòbils personalitzades per a control de dispositius IoT",
+        "Em vaig especialitzar en integració de dispositius Bluetooth Low Energy i WiFi"
+      ]
+    }
+  ],
+  "philosophy": {
+    "title": "La Meva Filosofia",
+    "content": "Crec en el poder de combinar el desenvolupament de programari tradicional amb tecnologies emergents d'IA i creació pràctica. Aquesta intersecció crea solucions innovadores que connecten la bretxa entre els mons digital i físic, habilitant noves possibilitats per a automatització, creativitat i interacció humà-ordinador."
+  }
+}
