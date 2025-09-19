@@ -1,0 +1,16 @@
+---
+import Layout from '@/layouts/Layout.astro';
+import { useTranslations } from '@/utils/i18n';
+
+const t = useTranslations('es');
+---
+
+<Layout title="Marc Uson - Desarrollador Full-Stack y Entusiasta de la IA" lang="es">
+  <main>
+    <section class="hero">
+      <h1>{t('hero.title')}</h1>
+      <p>{t('hero.subtitle1')}</p>
+      <p>{t('hero.subtitle2')}</p>
+    </section>
+  </main>
+</Layout>
