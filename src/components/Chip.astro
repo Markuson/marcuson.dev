@@ -1,0 +1,19 @@
+---
+export interface Props {
+  text: string;
+  variant?: 'default' | 'accent';
+  class?: string;
+}
+
+const { text, variant = 'default', class: className = '' } = Astro.props;
+
+const baseClasses = 'inline-block px-3 py-1 rounded-full text-chip font-medium transition-colors duration-200';
+const variantClasses = {
+  default: 'bg-bg-tertiary text-text-secondary hover:bg-bg-secondary hover:text-text-primary',
+  accent: 'bg-accent-primary text-bg-primary hover:bg-accent-secondary'
+};
+---
+
+<span class={`${baseClasses} ${variantClasses[variant]} ${className}`} role="listitem">
+  {text}
+</span>

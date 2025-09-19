@@ -1,0 +1,257 @@
+---
+import type { Language } from '@/utils/i18n';
+import { useTranslations } from '@/utils/i18n';
+
+export interface Props {
+  lang: Language;
+  currentPath?: string;
+}
+
+const { lang, currentPath = '' } = Astro.props;
+const t = useTranslations(lang);
+
+const navLinks = [
+  { href: `/${lang}/about`, label: t('nav.about') },
+  { href: `/${lang}/projects`, label: t('nav.projects') },
+  { href: `/${lang}/hobbies`, label: t('nav.hobbies') },
+  { href: `/${lang}/contact`, label: t('nav.contact') },
+];
+
+const isActive = (href: string) => currentPath === href;
+---
+
+<nav
+  class="fixed top-0 left-0 right-0 z-50 transition-all duration-200 ease-out opacity-0"
+  role="navigation"
+  aria-label="Main navigation"
+  id="main-nav"
+>
+  <div class="max-w-8xl mx-auto px-6 sm:px-8 lg:px-12">
+    <div class="flex items-center justify-between h-16 lg:h-20">
+      <!-- Logo -->
+      <a
+        href={`/${lang}`}
+        class="text-xl font-bold text-text-primary hover:text-accent-primary transition-colors duration-200 focus:outline-none focus:ring-2 focus:ring-accent-primary focus:ring-offset-2 focus:ring-offset-bg-primary"
+        aria-label="Marc Uson - Home"
+      >
+        marcuson.dev
+      </a>
+
+      <!-- Desktop Navigation -->
+      <div class="hidden md:flex items-center space-x-8">
+        <!-- Nav Links -->
+        <div class="flex items-center space-x-6">
+          {
+            navLinks.map(({ href, label }) => (
+              <a
+                href={href}
+                class={`text-text-secondary hover:text-text-primary transition-colors duration-200 font-medium relative focus:outline-none focus:ring-2 focus:ring-accent-primary focus:ring-offset-2 focus:ring-offset-bg-primary ${
+                  isActive(href) ? 'text-accent-primary' : ''
+                }`}
+                aria-current={isActive(href) ? 'page' : undefined}
+              >
+                {label}
+                {isActive(href) && (
+                  <span class="absolute -bottom-1 left-0 right-0 h-0.5 bg-accent-primary rounded-full" />
+                )}
+              </a>
+            ))
+          }
+        </div>
+
+        <!-- Language Selector -->
+        <div class="flex items-center space-x-2">
+          <span class="text-text-muted text-sm">Lang:</span>
+          <div class="flex items-center space-x-1">
+            {
+              ['en', 'es', 'ca'].map((locale) => (
+                <a
+                  href={`/${locale}${currentPath.replace(/^\/(en|es|ca)/, '')}`}
+                  class={`px-2 py-1 text-sm font-medium rounded transition-colors duration-200 focus:outline-none focus:ring-2 focus:ring-accent-primary focus:ring-offset-2 focus:ring-offset-bg-primary ${
+                    lang === locale
+                      ? 'bg-accent-primary text-bg-primary'
+                      : 'text-text-secondary hover:text-text-primary hover:bg-bg-tertiary'
+                  }`}
+                  aria-label={`Switch to ${locale.toUpperCase()}`}
+                >
+                  {locale.toUpperCase()}
+                </a>
+              ))
+            }
+          </div>
+        </div>
+
+        <!-- Download CV Button -->
+        <a
+          href="/assets/cv/marcuson.pdf"
+          download
+          class="inline-flex items-center px-4 py-2 bg-accent-primary text-bg-primary font-medium rounded-lg hover:bg-accent-secondary hover:scale-105 transition-all duration-200 focus:outline-none focus:ring-2 focus:ring-accent-primary focus:ring-offset-2 focus:ring-offset-bg-primary"
+          aria-label={t('nav.downloadCV')}
+        >
+          <svg
+            class="w-4 h-4 mr-2"
+            fill="none"
+            stroke="currentColor"
+            viewBox="0 0 24 24"
+            aria-hidden="true"
+          >
+            <path
+              stroke-linecap="round"
+              stroke-linejoin="round"
+              stroke-width="2"
+              d="M12 10v6m0 0l-3-3m3 3l3-3m2 8H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"
+            />
+          </svg>
+          {t('nav.downloadCV')}
+        </a>
+      </div>
+
+      <!-- Mobile Menu Button -->
+      <button
+        class="md:hidden p-2 text-text-secondary hover:text-text-primary transition-colors duration-200 focus:outline-none focus:ring-2 focus:ring-accent-primary focus:ring-offset-2 focus:ring-offset-bg-primary"
+        aria-label="Toggle mobile menu"
+        id="mobile-menu-button"
+        type="button"
+      >
+        <svg
+          class="w-6 h-6"
+          fill="none"
+          stroke="currentColor"
+          viewBox="0 0 24 24"
+          aria-hidden="true"
+        >
+          <path
+            stroke-linecap="round"
+            stroke-linejoin="round"
+            stroke-width="2"
+            d="M4 6h16M4 12h16M4 18h16"
+          />
+        </svg>
+      </button>
+    </div>
+  </div>
+
+  <!-- Mobile Menu -->
+  <div
+    class="md:hidden border-t border-border-primary bg-bg-secondary"
+    id="mobile-menu"
+    style="display: none;"
+  >
+    <div class="px-6 py-4 space-y-4">
+      <!-- Mobile Nav Links -->
+      {
+        navLinks.map(({ href, label }) => (
+          <a
+            href={href}
+            class={`block text-text-secondary hover:text-text-primary transition-colors duration-200 font-medium py-2 focus:outline-none focus:ring-2 focus:ring-accent-primary focus:ring-offset-2 focus:ring-offset-bg-secondary ${
+              isActive(href) ? 'text-accent-primary' : ''
+            }`}
+            aria-current={isActive(href) ? 'page' : undefined}
+          >
+            {label}
+          </a>
+        ))
+      }
+
+      <!-- Mobile Language Selector -->
+      <div class="pt-4 border-t border-border-primary">
+        <span class="block text-text-muted text-sm mb-2">Language:</span>
+        <div class="flex space-x-2">
+          {
+            ['en', 'es', 'ca'].map((locale) => (
+              <a
+                href={`/${locale}${currentPath.replace(/^\/(en|es|ca)/, '')}`}
+                class={`px-3 py-2 text-sm font-medium rounded transition-colors duration-200 focus:outline-none focus:ring-2 focus:ring-accent-primary focus:ring-offset-2 focus:ring-offset-bg-secondary ${
+                  lang === locale
+                    ? 'bg-accent-primary text-bg-primary'
+                    : 'text-text-secondary hover:text-text-primary hover:bg-bg-tertiary'
+                }`}
+                aria-label={`Switch to ${locale.toUpperCase()}`}
+              >
+                {locale.toUpperCase()}
+              </a>
+            ))
+          }
+        </div>
+      </div>
+
+      <!-- Mobile Download CV Button -->
+      <div class="pt-4">
+        <a
+          href="/assets/cv/marcuson.pdf"
+          download
+          class="inline-flex items-center justify-center w-full px-4 py-3 bg-accent-primary text-bg-primary font-medium rounded-lg hover:bg-accent-secondary transition-colors duration-200 focus:outline-none focus:ring-2 focus:ring-accent-primary focus:ring-offset-2 focus:ring-offset-bg-secondary"
+          aria-label={t('nav.downloadCV')}
+        >
+          <svg
+            class="w-4 h-4 mr-2"
+            fill="none"
+            stroke="currentColor"
+            viewBox="0 0 24 24"
+            aria-hidden="true"
+          >
+            <path
+              stroke-linecap="round"
+              stroke-linejoin="round"
+              stroke-width="2"
+              d="M12 10v6m0 0l-3-3m3 3l3-3m2 8H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"
+            />
+          </svg>
+          {t('nav.downloadCV')}
+        </a>
+      </div>
+    </div>
+  </div>
+</nav>
+
+<script>
+  // Mobile menu toggle
+  const mobileMenuButton = document.getElementById('mobile-menu-button');
+  const mobileMenu = document.getElementById('mobile-menu');
+
+  if (mobileMenuButton && mobileMenu) {
+    mobileMenuButton.addEventListener('click', () => {
+      const isOpen = mobileMenu.style.display !== 'none';
+      mobileMenu.style.display = isOpen ? 'none' : 'block';
+      mobileMenuButton.setAttribute('aria-expanded', (!isOpen).toString());
+    });
+  }
+
+  // Navigation scroll behavior
+  const nav = document.getElementById('main-nav');
+  let lastScrollY = window.scrollY;
+
+  function updateNavigation() {
+    const currentScrollY = window.scrollY;
+
+    if (currentScrollY > 16) {
+      // Fade in navbar with glass background
+      nav?.classList.add(
+        'opacity-100',
+        'bg-glass-bg',
+        'backdrop-blur-12',
+        'border-b',
+        'border-glass-border',
+        'shadow-glass'
+      );
+      nav?.classList.remove('opacity-0');
+    } else {
+      // Fade out navbar at top
+      nav?.classList.add('opacity-0');
+      nav?.classList.remove(
+        'opacity-100',
+        'bg-glass-bg',
+        'backdrop-blur-12',
+        'border-b',
+        'border-glass-border',
+        'shadow-glass'
+      );
+    }
+
+    lastScrollY = currentScrollY;
+  }
+
+  // Initialize and listen for scroll
+  updateNavigation();
+  window.addEventListener('scroll', updateNavigation, { passive: true });
+</script>

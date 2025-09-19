@@ -1,16 +1,16 @@
 ---
 import Layout from '@/layouts/Layout.astro';
-import { useTranslations } from '@/utils/i18n';
-
-const t = useTranslations('en');
+import Hero from '@/components/Hero.astro';
+import About from '@/components/About.astro';
+import Projects from '@/components/Projects.astro';
+import Hobbies from '@/components/Hobbies.astro';
+import Contact from '@/components/Contact.astro';
 ---
 
 <Layout title="Marc Uson - Full-Stack Developer & AI Enthusiast" lang="en">
-  <main>
-    <section class="hero">
-      <h1>{t('hero.title')}</h1>
-      <p>{t('hero.subtitle1')}</p>
-      <p>{t('hero.subtitle2')}</p>
-    </section>
-  </main>
+  <Hero lang="en" />
+  <About lang="en" />
+  <Projects lang="en" />
+  <Hobbies lang="en" />
+  <Contact lang="en" />
 </Layout>

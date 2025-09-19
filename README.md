@@ -1,36 +1,24 @@
-# Astro Starter Kit: Basics
+# marcuson.dev
 
-```sh
-pnpm create astro@latest -- --template basics
-```
+Multi-language portfolio website for Marc Uson - Industrial Engineer turned Full-Stack Developer & AI Enthusiast.
 
-> 🧑‍🚀 **Seasoned astronaut?** Delete this file. Have fun!
+## 🌐 Languages
 
-## 🚀 Project Structure
+- English (`/en`)
+- Spanish (`/es`)
+- Catalan (`/ca`)
 
-Inside of your Astro project, you'll see the following folders and files:
+## 🛠️ Tech Stack
 
-```text
-/
-├── public/
-│   └── favicon.svg
-├── src
-│   ├── assets
-│   │   └── astro.svg
-│   ├── components
-│   │   └── Welcome.astro
-│   ├── layouts
-│   │   └── Layout.astro
-│   └── pages
-│       └── index.astro
-└── package.json
-```
+- **Framework**: Astro 5 with React islands
+- **Styling**: Tailwind CSS 4 with custom design tokens
+- **TypeScript**: Strict mode with comprehensive type safety
+- **Content**: Astro Content Collections with Zod schemas
+- **Deployment**: Vercel with edge middleware
 
-To learn more about the folder structure of an Astro project, refer to [our guide on project structure](https://docs.astro.build/en/basics/project-structure/).
+## 🚀 Commands
 
-## 🧞 Commands
-
-All commands are run from the root of the project, from a terminal:
+All commands are run from the root of the project:
 
 | Command                | Action                                           |
 | :--------------------- | :----------------------------------------------- |
@@ -38,9 +26,22 @@ All commands are run from the root of the project, from a terminal:
 | `pnpm dev`             | Starts local dev server at `localhost:4321`      |
 | `pnpm build`           | Build your production site to `./dist/`          |
 | `pnpm preview`         | Preview your build locally, before deploying     |
-| `pnpm astro ...`       | Run CLI commands like `astro add`, `astro check` |
-| `pnpm astro -- --help` | Get help using the Astro CLI                     |
+| `pnpm lint`            | Run ESLint for code quality                      |
+| `pnpm typecheck`       | Run TypeScript type checking                     |
 
-## 👀 Want to learn more?
+## 📁 Project Structure
 
-Feel free to check [our documentation](https://docs.astro.build) or jump into our [Discord server](https://astro.build/chat).
+```text
+/
+├── docs/                  # Project documentation
+├── public/               # Static assets
+├── src/
+│   ├── assets/          # Design assets (SVGs, images)
+│   ├── components/      # Astro components
+│   ├── content/         # Content Collections (i18n)
+│   ├── layouts/         # Page layouts
+│   ├── pages/           # Route pages (/en, /es, /ca)
+│   ├── styles/          # Global styles
+│   └── utils/           # Utilities (i18n, helpers)
+└── package.json
+```

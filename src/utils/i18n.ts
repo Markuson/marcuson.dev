@@ -97,7 +97,7 @@ export function getLangFromUrl(url: URL): Language {
 
 export function useTranslations(lang: Language) {
   return function t(key: keyof (typeof ui)[typeof defaultLang]) {
-    return ui[lang][key] || ui[defaultLang][key];
+    return ui[lang]?.[key] || ui[defaultLang][key] || key;
   };
 }
 

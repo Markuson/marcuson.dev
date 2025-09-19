@@ -1,0 +1,146 @@
+---
+import Container from '@/components/Container.astro';
+import SectionHeader from '@/components/SectionHeader.astro';
+import Chip from '@/components/Chip.astro';
+import type { Language } from '@/utils/i18n';
+import { useTranslations } from '@/utils/i18n';
+
+export interface Props {
+  lang: Language;
+}
+
+const { lang } = Astro.props;
+const t = useTranslations(lang);
+
+// Mock hobbies data
+const hobbies = [
+  {
+    title: '3D Printing',
+    description: 'Creating functional prototypes and artistic pieces using various 3D printing technologies and materials.',
+    highlights: [
+      'Custom enclosures for electronics projects',
+      'Miniatures and artistic sculptures',
+      'Functional parts for IoT devices',
+      'Parametric design in Fusion 360'
+    ],
+    tools: ['Ender 3 Pro', 'Elegoo Mars', 'PLA/PETG/Resin', 'Fusion 360'],
+    icon: `<svg class="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true">
+        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 11H5m14 0a2 2 0 012 2v6a2 2 0 01-2 2H5a2 2 0 01-2-2v-6a2 2 0 012-2m14 0V9a2 2 0 00-2-2M5 11V9a2 2 0 012-2m0 0V5a2 2 0 012-2h6a2 2 0 012 2v2M7 7h10" />
+      </svg>`
+  },
+  {
+    title: 'Electronics',
+    description: 'Designing and building custom electronic circuits for automation and IoT applications.',
+    highlights: [
+      'Arduino shields for sensor integration',
+      'ESP32-based IoT networks',
+      'LED matrix controllers and drivers',
+      'Power management circuits'
+    ],
+    tools: ['KiCad', 'Arduino IDE', 'Multimeter', 'Oscilloscope'],
+    icon: `<svg class="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true">
+        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 10V3L4 14h7v7l9-11h-7z" />
+      </svg>`
+  },
+  {
+    title: 'Robotics',
+    description: 'Building autonomous systems and robotic solutions for various applications.',
+    highlights: [
+      'Line-following and obstacle-avoidance robots',
+      'Home automation with custom sensors',
+      'Robotic arm with computer vision',
+      'Modified drones for aerial photography'
+    ],
+    tools: ['Raspberry Pi', 'Arduino', 'ROS', 'OpenCV'],
+    icon: `<svg class="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true">
+        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 3v2m6-2v2M9 19v2m6-2v2M5 9H3m2 6H3m18-6h-2m2 6h-2M7 19h10a2 2 0 002-2V7a2 2 0 00-2-2H7a2 2 0 00-2 2v10a2 2 0 002 2zM9 9h6v6H9V9z" />
+      </svg>`
+  },
+  {
+    title: 'AI Vibecoding',
+    description: 'Exploring AI-assisted development and mood-based coding environments.',
+    highlights: [
+      'GPT models for code generation',
+      'Mood-based development environment tools',
+      'AI-assisted 3D model generation',
+      'Automated testing with LLMs'
+    ],
+    tools: ['OpenAI API', 'Hugging Face', 'LangChain', 'Custom Models'],
+    icon: `<svg class="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true">
+        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9.663 17h4.673M12 3v1m6.364 1.636l-.707.707M21 12h-1M4 12H3m3.343-5.657l-.707-.707m2.828 9.9a5 5 0 117.072 0l-.548.547A3.374 3.374 0 0014 18.469V19a2 2 0 11-4 0v-.531c0-.895-.356-1.754-.988-2.386l-.548-.547z" />
+      </svg>`
+  }
+];
+---
+
+<section class="py-20 lg:py-32 bg-bg-secondary">
+  <Container>
+    <SectionHeader
+      title={t('hobbies.title')}
+      subtitle={t('hobbies.subtitle')}
+      centered={true}
+      class="mb-16"
+    />
+
+    <!-- Hobbies Grid -->
+    <div class="grid md:grid-cols-2 gap-8 mb-16">
+      {hobbies.map((hobby) => (
+        <article class="bg-bg-tertiary rounded-lg p-8 hover:bg-bg-primary transition-all duration-200 shadow-card hover:shadow-card-hover border border-border-primary hover:border-accent-primary group">
+          <!-- Icon and Title -->
+          <div class="flex items-center mb-6">
+            <div class="inline-flex items-center justify-center w-12 h-12 bg-accent-primary rounded-lg text-bg-primary mr-4 group-hover:scale-105 transition-transform duration-200" set:html={hobby.icon}>
+            </div>
+            <h3 class="text-xl font-semibold text-text-primary group-hover:text-accent-primary transition-colors duration-200">
+              {hobby.title}
+            </h3>
+          </div>
+
+          <!-- Description -->
+          <p class="text-text-secondary leading-relaxed mb-6">
+            {hobby.description}
+          </p>
+
+          <!-- Recent Projects & Highlights -->
+          <div class="mb-6">
+            <h4 class="text-sm font-medium text-accent-primary mb-3 uppercase tracking-wide">
+              Recent Projects & Highlights
+            </h4>
+            <ul class="space-y-2">
+              {hobby.highlights.map((highlight) => (
+                <li class="text-text-muted text-sm flex items-start">
+                  <svg class="w-4 h-4 text-accent-primary mr-2 mt-0.5 flex-shrink-0" fill="currentColor" viewBox="0 0 20 20" aria-hidden="true">
+                    <path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd" />
+                  </svg>
+                  <span>{highlight}</span>
+                </li>
+              ))}
+            </ul>
+          </div>
+
+          <!-- Tools & Technologies -->
+          <div>
+            <h4 class="text-sm font-medium text-accent-primary mb-3 uppercase tracking-wide">
+              Tools & Technologies
+            </h4>
+            <div class="flex flex-wrap gap-2" role="list">
+              {hobby.tools.map((tool) => (
+                <Chip text={tool} class="text-xs" />
+              ))}
+            </div>
+          </div>
+        </article>
+      ))}
+    </div>
+
+    <!-- Collaboration Banner -->
+    <div class="bg-gradient-to-r from-accent-primary to-accent-secondary rounded-lg p-8 text-center">
+      <h3 class="text-2xl font-bold text-bg-primary mb-4">
+        Let's Build Something Together
+      </h3>
+      <p class="text-bg-primary/80 text-lg leading-relaxed max-w-2xl mx-auto">
+        Interested in collaborating on a project that combines technology with hands-on making?
+        I'm always excited to work on innovative solutions that bridge the digital and physical worlds.
+      </p>
+    </div>
+  </Container>
+</section>
