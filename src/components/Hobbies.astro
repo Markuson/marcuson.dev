@@ -83,7 +83,7 @@ const hobbies = [
     />
 
     <!-- Hobbies Grid -->
-    <div class="grid md:grid-cols-2 gap-8 mb-16 ">
+    <div class="grid md:grid-cols-2 gap-8 mb-16" role="region" aria-label="Hobbies and making projects">
       {hobbies.map((hobby) => (
         <article class="bg-bg-secondary rounded-lg p-6 shadow-card border border-border-primary">
           <!-- Icon and Title -->
@@ -102,10 +102,10 @@ const hobbies = [
 
           <!-- Recent Projects & Highlights -->
           <div class="mb-6">
-            <h4 class="text-sm font-medium text-accent-primary mb-3 uppercase tracking-wide">
+            <h4 class="text-sm font-medium text-accent-primary mb-3 uppercase tracking-wide" id={`highlights-${hobby.title.toLowerCase().replace(/\s+/g, '-')}`}>
               Recent Projects & Highlights
             </h4>
-            <ul class="space-y-2">
+            <ul class="space-y-2" role="list" aria-labelledby={`highlights-${hobby.title.toLowerCase().replace(/\s+/g, '-')}`}>
               {hobby.highlights.map((highlight) => (
                 <li class="text-text-muted text-sm flex items-start">
                   <svg class="w-4 h-4 text-accent-primary mr-2 mt-0.5 flex-shrink-0" fill="currentColor" viewBox="0 0 20 20" aria-hidden="true">
@@ -119,10 +119,10 @@ const hobbies = [
 
           <!-- Tools & Technologies -->
           <div>
-            <h4 class="text-sm font-medium text-accent-primary mb-3 uppercase tracking-wide">
+            <h4 class="text-sm font-medium text-accent-primary mb-3 uppercase tracking-wide" id={`tools-${hobby.title.toLowerCase().replace(/\s+/g, '-')}`}>
               Tools & Technologies
             </h4>
-            <div class="flex flex-wrap gap-2" role="list">
+            <div class="flex flex-wrap gap-2" role="list" aria-labelledby={`tools-${hobby.title.toLowerCase().replace(/\s+/g, '-')}`}>
               {hobby.tools.map((tool) => (
                 <Chip text={tool} class="text-xs" />
               ))}
@@ -133,14 +133,14 @@ const hobbies = [
     </div>
 
     <!-- Collaboration Banner -->
-    <div class="border border-gray-700 rounded-lg p-8 text-center">
+    <section class="border border-gray-700 rounded-lg p-8 text-center" aria-labelledby="collaboration-heading">
         <div class="inline-flex items-center justify-center mb-6">
           <svg class="w-12 h-12 text-accent-primary" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true">
             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H7m10 0v-2c0-.656-.126-1.283-.356-1.857M7 20H2v-2a3 3 0 015.356-1.857M7 20v-2c0-.656.126-1.283.356-1.857m0 0a5.002 5.002 0 019.288 0M15 7a3 3 0 11-6 0 3 3 0 016 0zm6 3a2 2 0 11-4 0 2 2 0 014 0zM7 10a2 2 0 11-4 0 2 2 0 014 0z" />
           </svg>
         </div>
 
-        <h3 class="text-3xl font-bold text-text-primary mb-4">
+        <h3 class="text-3xl font-bold text-text-primary mb-4" id="collaboration-heading">
           Let's Build Something Together
         </h3>
 
@@ -148,6 +148,6 @@ const hobbies = [
           Interested in collaborating on a project that combines technology with hands-on making?
           I'm always excited to work on innovative solutions that bridge the digital and physical worlds.
         </p>
-    </div>
+    </section>
   </Container>
 </section>

@@ -22,7 +22,7 @@ const t = useTranslations(lang);
     />
 
     <!-- Contact Cards Row 1 -->
-    <div class="grid md:grid-cols-3 gap-6 mb-8 mx-[10%]">
+    <div class="grid md:grid-cols-3 gap-6 mb-8 mx-[10%]" role="region" aria-label="Contact methods">
       <!-- Email Card -->
       <article class="bg-bg-secondary rounded-lg p-6 text-center transition-all duration-200 shadow-card hover:shadow-lg hover:-translate-y-1 border border-border-primary">
         <div class="inline-flex items-center justify-center w-12 h-12 bg-bg-tertiary rounded-full text-accent-primary mb-4">
@@ -34,7 +34,7 @@ const t = useTranslations(lang);
         <p class="text-text-secondary text-sm mb-4">hi@marcuson.dev</p>
         <a
           href="mailto:hi@marcuson.dev"
-          class="inline-flex items-center justify-center w-full px-4 py-2 bg-accent-primary text-bg-primary font-medium rounded hover:bg-accent-secondary transition-colors duration-200 focus:outline-none focus:ring-2 focus:ring-accent-primary focus:ring-offset-2 focus:ring-offset-bg-secondary"
+          class="inline-flex items-center justify-center w-full px-4 py-3 bg-accent-primary text-bg-primary font-medium rounded hover:bg-accent-secondary transition-colors duration-200 focus:outline-none focus:ring-2 focus:ring-accent-primary focus:ring-offset-2 focus:ring-offset-bg-secondary min-h-[44px]"
         >
           Send Email
         </a>
@@ -53,7 +53,7 @@ const t = useTranslations(lang);
           href="https://github.com/Markuson"
           target="_blank"
           rel="noopener noreferrer"
-          class="inline-flex items-center justify-center w-full px-4 py-2 border border-accent-primary text-accent-primary font-medium rounded hover:bg-accent-primary hover:text-bg-primary transition-colors duration-200 focus:outline-none focus:ring-2 focus:ring-accent-primary focus:ring-offset-2 focus:ring-offset-bg-secondary"
+          class="inline-flex items-center justify-center w-full px-4 py-3 border border-accent-primary text-accent-primary font-medium rounded hover:bg-accent-primary hover:text-bg-primary transition-colors duration-200 focus:outline-none focus:ring-2 focus:ring-accent-primary focus:ring-offset-2 focus:ring-offset-bg-secondary min-h-[44px]"
         >
           View Repos
         </a>
@@ -72,7 +72,7 @@ const t = useTranslations(lang);
           href="https://linkedin.com/in/marc-uson"
           target="_blank"
           rel="noopener noreferrer"
-          class="inline-flex items-center justify-center w-full px-4 py-2 border border-accent-primary text-accent-primary font-medium rounded hover:bg-accent-primary hover:text-bg-primary transition-colors duration-200 focus:outline-none focus:ring-2 focus:ring-accent-primary focus:ring-offset-2 focus:ring-offset-bg-secondary"
+          class="inline-flex items-center justify-center w-full px-4 py-3 border border-accent-primary text-accent-primary font-medium rounded hover:bg-accent-primary hover:text-bg-primary transition-colors duration-200 focus:outline-none focus:ring-2 focus:ring-accent-primary focus:ring-offset-2 focus:ring-offset-bg-secondary min-h-[44px]"
         >
           View Profile
         </a>
@@ -80,7 +80,7 @@ const t = useTranslations(lang);
     </div>
 
     <!-- Contact Cards Row 2 -->
-    <div class="grid md:grid-cols-2 gap-6 mb-12 mx-[10%]">
+    <div class="grid md:grid-cols-2 gap-6 mb-12 mx-[10%]" role="region" aria-label="Collaboration opportunities">
       <!-- Start a Project Card -->
       <article class="bg-bg-secondary rounded-lg p-8 transition-all duration-200 shadow-card hover:shadow-lg hover:-translate-y-1 border border-border-primary">
         <div class="flex items-start">
@@ -96,7 +96,7 @@ const t = useTranslations(lang);
             </p>
             <a
               href="mailto:hi@marcuson.dev?subject=Project Collaboration"
-              class="inline-flex items-center px-6 py-3 bg-accent-primary text-bg-primary font-medium rounded hover:bg-accent-secondary transition-colors duration-200 focus:outline-none focus:ring-2 focus:ring-accent-primary focus:ring-offset-2 focus:ring-offset-bg-secondary"
+              class="inline-flex items-center px-6 py-4 bg-accent-primary text-bg-primary font-medium rounded hover:bg-accent-secondary transition-colors duration-200 focus:outline-none focus:ring-2 focus:ring-accent-primary focus:ring-offset-2 focus:ring-offset-bg-secondary min-h-[48px]"
             >
               Get In Touch
             </a>
@@ -120,7 +120,7 @@ const t = useTranslations(lang);
             <a
               href="/assets/cv/marcuson.pdf"
               download
-              class="inline-flex items-center px-6 py-3 border border-accent-primary text-accent-primary font-medium rounded hover:bg-accent-primary hover:text-bg-primary transition-colors duration-200 focus:outline-none focus:ring-2 focus:ring-accent-primary focus:ring-offset-2 focus:ring-offset-bg-secondary"
+              class="inline-flex items-center px-6 py-4 border border-accent-primary text-accent-primary font-medium rounded hover:bg-accent-primary hover:text-bg-primary transition-colors duration-200 focus:outline-none focus:ring-2 focus:ring-accent-primary focus:ring-offset-2 focus:ring-offset-bg-secondary min-h-[48px]"
             >
               <svg class="w-4 h-4 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true">
                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 10v6m0 0l-3-3m3 3l3-3m2 8H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z" />
@@ -133,7 +133,7 @@ const t = useTranslations(lang);
     </div>
 
     <!-- Current Status -->
-    <div class="border border-border-primary rounded-lg p-8 text-center mx-[10%]">
+    <section class="border border-border-primary rounded-lg p-8 text-center mx-[10%]" aria-labelledby="status-heading">
         <div class="inline-flex items-center justify-center mb-6">
           <svg class="w-12 h-12 text-accent-primary" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true">
             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z" />
@@ -141,7 +141,7 @@ const t = useTranslations(lang);
           </svg>
         </div>
 
-        <h3 class="text-3xl font-bold text-text-primary mb-4">
+        <h3 class="text-3xl font-bold text-text-primary mb-4" id="status-heading">
           Current Status
         </h3>
 
@@ -149,10 +149,10 @@ const t = useTranslations(lang);
           Based in Uppsala. Available for remote collaboration worldwide
         </p>
 
-        <div class="inline-flex items-center text-green-500">
-          <div class="w-3 h-3 bg-green-500 rounded-full mr-2 animate-pulse"></div>
+        <div class="inline-flex items-center text-green-500" role="status" aria-live="polite">
+          <div class="w-3 h-3 bg-green-500 rounded-full mr-2 animate-pulse" aria-hidden="true"></div>
           <span class="font-medium">Open to new opportunities</span>
         </div>
-    </div>
+    </section>
   </Container>
 </section>
