@@ -11,11 +11,11 @@ const { lang } = Astro.props;
 const t = useTranslations(lang);
 ---
 
-<section class="relative h-screen flex items-center justify-center overflow-hidden bg-bg-primary">
+<section class="relative h-screen flex items-center justify-center overflow-hidden bg-bg-contrast">
   <!-- Hero Background SVG -->
   <div class="absolute inset-0">
     <img
-      src="/src/assets/hero-background.svg"
+      src="/hero-background.svg"
       alt=""
       class="w-full h-full object-cover object-center"
       aria-hidden="true"
@@ -24,9 +24,9 @@ const t = useTranslations(lang);
 
   <!-- Hero Content -->
   <Container as="div" class="relative z-10 text-center px-8">
-    <div class="max-w-4xl mx-auto">
+    <div class="max-w-5xl mx-auto">
       <!-- Main Title -->
-      <h1 class="text-4xl md:text-5xl lg:text-6xl font-bold text-text-primary mb-8 leading-tight px-4">
+      <h1 class="text-4xl md:text-7xl lg:text-7xl font-bold text-accent-primary mb-6 leading-none px-1 mt-20">
         {t('hero.title')}
       </h1>
 

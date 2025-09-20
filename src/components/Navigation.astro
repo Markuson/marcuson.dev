@@ -26,8 +26,8 @@ const isActive = (href: string) => currentPath === href;
   aria-label="Main navigation"
   id="main-nav"
 >
-  <div class="max-w-8xl mx-auto px-6 sm:px-8 lg:px-12">
-    <div class="flex items-center justify-between h-16 lg:h-20">
+  <div class="max-w-8xl mx-auto px-8 sm:px-12 lg:px-50">
+    <div class="flex items-center justify-between h-12 lg:h-14">
       <!-- Logo -->
       <a
         href={`/${lang}`}
@@ -61,22 +61,35 @@ const isActive = (href: string) => currentPath === href;
         </div>
 
         <!-- Language Selector -->
-        <div class="flex items-center space-x-1">
-          {
-            ['ca', 'es', 'en'].map((locale) => (
+        <div class="relative" id="language-selector">
+          <button
+            class="px-3 py-1 text-sm font-medium border border-accent-primary text-accent-primary rounded transition-colors duration-200 focus:outline-none focus:ring-2 focus:ring-accent-primary focus:ring-offset-2 focus:ring-offset-bg-primary flex items-center hover:bg-accent-primary hover:text-bg-primary"
+            aria-label="Select language"
+            id="language-button"
+            type="button"
+          >
+            {lang.toUpperCase()}
+            <svg class="w-4 h-4 ml-1" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7" />
+            </svg>
+          </button>
+          <div
+            class="absolute top-full mt-1 right-0 bg-bg-secondary border border-border-primary rounded shadow-lg py-1 min-w-16 z-50"
+            id="language-dropdown"
+            style="display: none;"
+          >
+            {
+              ['ca', 'es', 'en'].filter(locale => locale !== lang).map((locale) => (
                 <a
                   href={`/${locale}${currentPath.replace(/^\/(en|es|ca)/, '')}`}
-                  class={`px-2 py-1 text-sm font-medium rounded transition-colors duration-200 focus:outline-none focus:ring-2 focus:ring-accent-primary focus:ring-offset-2 focus:ring-offset-bg-primary ${
-                    lang === locale
-                      ? 'bg-accent-primary text-bg-primary'
-                      : 'text-text-secondary hover:text-text-primary hover:bg-bg-tertiary'
-                  }`}
+                  class="block px-3 py-2 text-sm font-medium text-text-secondary hover:text-text-primary hover:bg-bg-tertiary transition-colors duration-200"
                   aria-label={`Switch to ${locale.toUpperCase()}`}
                 >
                   {locale.toUpperCase()}
                 </a>
               ))
             }
+          </div>
         </div>
 
         <!-- Download CV Button -->
@@ -212,6 +225,26 @@ const isActive = (href: string) => currentPath === href;
       const isOpen = mobileMenu.style.display !== 'none';
       mobileMenu.style.display = isOpen ? 'none' : 'block';
       mobileMenuButton.setAttribute('aria-expanded', (!isOpen).toString());
+    });
+  }
+
+  // Language selector dropdown
+  const languageButton = document.getElementById('language-button');
+  const languageDropdown = document.getElementById('language-dropdown');
+
+  if (languageButton && languageDropdown) {
+    languageButton.addEventListener('click', () => {
+      const isOpen = languageDropdown.style.display !== 'none';
+      languageDropdown.style.display = isOpen ? 'none' : 'block';
+      languageButton.setAttribute('aria-expanded', (!isOpen).toString());
+    });
+
+    // Close dropdown when clicking outside
+    document.addEventListener('click', (event) => {
+      if (!languageButton.contains(event.target as Node) && !languageDropdown.contains(event.target as Node)) {
+        languageDropdown.style.display = 'none';
+        languageButton.setAttribute('aria-expanded', 'false');
+      }
     });
   }
 

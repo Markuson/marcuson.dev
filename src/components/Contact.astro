@@ -12,7 +12,7 @@ const { lang } = Astro.props;
 const t = useTranslations(lang);
 ---
 
-<section id="contact-section" class="py-20 lg:py-32 bg-slate-900 ">
+<section id="contact-section" class="py-20 lg:py-32 bg-bg-contrast">
   <Container>
     <SectionHeader
       title={t('contact.title')}
@@ -133,15 +133,15 @@ const t = useTranslations(lang);
     </div>
 
     <!-- Current Status -->
-    <div class="bg-bg-secondary rounded-lg p-8 transition-all duration-200 shadow-card border border-border-primarybg-bg-secondary border border-gray-700 rounded-lg p-8 text-center mx-[10%]">
-        <div class="inline-flex items-center justify-center mb-4">
-          <svg class="w-6 h-6 text-accent-primary" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true">
+    <div class="border border-border-primary rounded-lg p-8 text-center mx-[10%]">
+        <div class="inline-flex items-center justify-center mb-6">
+          <svg class="w-12 h-12 text-accent-primary" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true">
             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z" />
             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 11a3 3 0 11-6 0 3 3 0 016 0z" />
           </svg>
         </div>
 
-        <h3 class="text-xl font-semibold text-text-primary mb-3">
+        <h3 class="text-3xl font-bold text-text-primary mb-4">
           Current Status
         </h3>
 
