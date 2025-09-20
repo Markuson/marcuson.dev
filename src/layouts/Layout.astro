@@ -118,7 +118,19 @@ const structuredData = {
 
     <!-- Preload critical resources -->
     <link rel="preload" href="/hero-background.svg" as="image" />
+    <link rel="preload" href="/favicon.svg" as="image" />
+
+    <!-- DNS prefetch for external domains -->
     <link rel="dns-prefetch" href="//fonts.googleapis.com" />
+    <link rel="dns-prefetch" href="//github.com" />
+    <link rel="dns-prefetch" href="//linkedin.com" />
+
+    <!-- Preconnect to critical external domains -->
+    <link rel="preconnect" href="https://fonts.googleapis.com" crossorigin />
+
+    <!-- Prefetch likely navigation targets -->
+    <link rel="prefetch" href={`${siteUrl}/${lang === 'en' ? 'es' : 'en'}`} />
+    <link rel="prefetch" href={`${siteUrl}/sitemap-index.xml`} />
 
     <!-- Sitemap -->
     <link rel="sitemap" href="/sitemap-index.xml" />

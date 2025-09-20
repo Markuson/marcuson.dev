@@ -10,7 +10,10 @@
     "typecheck": "tsc --noEmit",
     "lint": "eslint . --ext .astro,.ts,.tsx",
     "lint:fix": "eslint . --ext .astro,.ts,.tsx --fix",
-    "format": "prettier --write ."
+    "format": "prettier --write .",
+    "lighthouse": "lhci autorun",
+    "lighthouse:collect": "lhci collect",
+    "lighthouse:assert": "lhci assert"
   },
   "dependencies": {
     "@astrojs/react": "^4.3.1",
@@ -31,6 +34,7 @@
   },
   "devDependencies": {
     "@eslint/js": "^9.36.0",
+    "@lhci/cli": "^0.15.1",
     "astro-eslint-parser": "^1.2.2",
     "prettier-plugin-astro": "^0.14.1"
   }
