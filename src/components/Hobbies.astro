@@ -73,7 +73,7 @@ const hobbies = [
 ];
 ---
 
-<section class="py-20 lg:py-32 bg-bg-secondary">
+<section id="hobbies-section" class="py-20 lg:py-32 bg-gray-900">
   <Container>
     <SectionHeader
       title={t('hobbies.title')}
@@ -83,14 +83,14 @@ const hobbies = [
     />
 
     <!-- Hobbies Grid -->
-    <div class="grid md:grid-cols-2 gap-8 mb-16">
+    <div class="grid md:grid-cols-2 gap-8 mb-16 ">
       {hobbies.map((hobby) => (
-        <article class="bg-bg-tertiary rounded-lg p-8 hover:bg-bg-primary transition-all duration-200 shadow-card hover:shadow-card-hover border border-border-primary hover:border-accent-primary group">
+        <article class="bg-bg-secondary rounded-lg p-6 shadow-card border border-border-primary">
           <!-- Icon and Title -->
           <div class="flex items-center mb-6">
-            <div class="inline-flex items-center justify-center w-12 h-12 bg-accent-primary rounded-lg text-bg-primary mr-4 group-hover:scale-105 transition-transform duration-200" set:html={hobby.icon}>
+            <div class="inline-flex items-center justify-center w-12 h-12 text-accent-primary mr-4" set:html={hobby.icon}>
             </div>
-            <h3 class="text-xl font-semibold text-text-primary group-hover:text-accent-primary transition-colors duration-200">
+            <h3 class="text-xl font-semibold text-text-primary">
               {hobby.title}
             </h3>
           </div>
@@ -133,14 +133,21 @@ const hobbies = [
     </div>
 
     <!-- Collaboration Banner -->
-    <div class="bg-gradient-to-r from-accent-primary to-accent-secondary rounded-lg p-8 text-center">
-      <h3 class="text-2xl font-bold text-bg-primary mb-4">
-        Let's Build Something Together
-      </h3>
-      <p class="text-bg-primary/80 text-lg leading-relaxed max-w-2xl mx-auto">
-        Interested in collaborating on a project that combines technology with hands-on making?
-        I'm always excited to work on innovative solutions that bridge the digital and physical worlds.
-      </p>
+    <div class="border border-gray-700 rounded-lg p-8 text-center">
+        <div class="inline-flex items-center justify-center mb-6">
+          <svg class="w-12 h-12 text-accent-primary" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H7m10 0v-2c0-.656-.126-1.283-.356-1.857M7 20H2v-2a3 3 0 015.356-1.857M7 20v-2c0-.656.126-1.283.356-1.857m0 0a5.002 5.002 0 019.288 0M15 7a3 3 0 11-6 0 3 3 0 016 0zm6 3a2 2 0 11-4 0 2 2 0 014 0zM7 10a2 2 0 11-4 0 2 2 0 014 0z" />
+          </svg>
+        </div>
+
+        <h3 class="text-3xl font-bold text-text-primary mb-4">
+          Let's Build Something Together
+        </h3>
+
+        <p class="text-lg text-text-secondary leading-relaxed max-w-3xl mx-auto">
+          Interested in collaborating on a project that combines technology with hands-on making?
+          I'm always excited to work on innovative solutions that bridge the digital and physical worlds.
+        </p>
     </div>
   </Container>
 </section>

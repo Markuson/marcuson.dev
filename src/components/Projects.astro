@@ -2,6 +2,7 @@
 import Container from '@/components/Container.astro';
 import SectionHeader from '@/components/SectionHeader.astro';
 import Chip from '@/components/Chip.astro';
+import Badge from '@/components/Badge.astro';
 import type { Language } from '@/utils/i18n';
 import { useTranslations } from '@/utils/i18n';
 import { getCollection } from 'astro:content';
@@ -80,7 +81,7 @@ const getStatusColor = (status: string) => {
 };
 ---
 
-<section class="py-20 lg:py-32 bg-bg-primary">
+<section id="projects-section" class="py-20 lg:py-32 bg-slate-900">
   <Container>
     <SectionHeader
       title={t('projects.title')}
@@ -92,19 +93,15 @@ const getStatusColor = (status: string) => {
     <!-- Projects Grid -->
     <div class="grid md:grid-cols-2 xl:grid-cols-3 gap-8 mb-12">
       {mockProjects.map((project) => (
-        <article class="bg-bg-secondary rounded-lg p-6 hover:bg-bg-tertiary transition-all duration-200 shadow-card hover:shadow-card-hover border border-border-primary hover:border-accent-primary group">
+        <article class="bg-bg-secondary rounded-lg p-6 transition-all duration-200 shadow-card hover:shadow-lg hover:-translate-y-1 border border-border-primary group flex flex-col h-full">
           <!-- Badges -->
           <div class="flex items-center gap-2 mb-4">
-            <span class="px-2 py-1 text-xs font-medium rounded bg-bg-tertiary text-text-muted">
-              {project.category}
-            </span>
-            <span class={`px-2 py-1 text-xs font-medium rounded ${getStatusColor(project.status)}`}>
-              {project.status}
-            </span>
+            <Badge text={project.category} variant="default" />
+            <Badge text={project.status} variant="status" class={getStatusColor(project.status)} />
           </div>
 
           <!-- Title -->
-          <h3 class="text-card-title font-semibold text-text-primary mb-3 group-hover:text-accent-primary transition-colors duration-200">
+          <h3 class="text-card-title font-semibold text-text-primary mb-3">
             {project.title}
           </h3>
 
@@ -116,9 +113,12 @@ const getStatusColor = (status: string) => {
           <!-- Tech Stack -->
           <div class="flex flex-wrap gap-1 mb-6" role="list">
             {project.tech.map((tech) => (
-              <Chip text={tech} class="text-xs" />
+              <Chip text={tech} />
             ))}
           </div>
+
+          <!-- Spacer to push buttons to bottom -->
+          <div class="flex-grow"></div>
 
           <!-- Action Buttons -->
           <div class="flex gap-3">
@@ -152,9 +152,12 @@ const getStatusColor = (status: string) => {
               </a>
             )}
 
-            {!project.codeUrl && !project.demoUrl && (
+            {!project.codeUrl && (
               <div class="flex-1 inline-flex items-center justify-center px-3 py-2 text-sm font-medium text-text-muted bg-bg-tertiary rounded cursor-not-allowed">
-                <span class="px-2 py-1 text-xs bg-gray-500 text-white rounded">Private</span>
+                <svg class="w-4 h-4 mr-2" fill="currentColor" viewBox="0 0 20 20" aria-hidden="true">
+                  <path fill-rule="evenodd" d="M12.316 3.051a1 1 0 01.633 1.265l-4 12a1 1 0 11-1.898-.632l4-12a1 1 0 011.265-.633zM5.707 6.293a1 1 0 010 1.414L3.414 10l2.293 2.293a1 1 0 11-1.414 1.414l-3-3a1 1 0 010-1.414l3-3a1 1 0 011.414 0zm8.586 0a1 1 0 011.414 0l3 3a1 1 0 010 1.414l-3 3a1 1 0 11-1.414-1.414L16.586 10l-2.293-2.293a1 1 0 010-1.414z" clip-rule="evenodd" />
+                </svg>
+                Private
               </div>
             )}
           </div>

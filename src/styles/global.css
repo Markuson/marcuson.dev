@@ -1,12 +1,28 @@
 @import 'tailwindcss';
 
+@theme {
+  --color-accent-primary: #84CC16;
+  --color-accent-secondary: #65A30D;
+  --color-accent-tertiary: #A3E635;
+  --color-bg-primary: #0B0F14;
+  --color-bg-secondary: #111827;
+  --color-bg-tertiary: #1F2937;
+  --color-text-primary: #E5E7EB;
+  --color-text-secondary: #9CA3AF;
+  --color-text-muted: #6B7280;
+  --color-border-primary: #ffffff14;
+  --color-border-secondary: #ffffff0d;
+  --color-glass-bg: #11111199;
+  --color-glass-border: #ffffff14;
+}
+
 /* Focus ring reset for better custom focus styles */
 *:focus {
   outline: none;
 }
 
 *:focus-visible {
-  outline: 2px solid #84CC16;
+  outline: 2px solid var(--color-accent-primary);
   outline-offset: 2px;
 }
 

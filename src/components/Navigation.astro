@@ -11,17 +11,17 @@ const { lang, currentPath = '' } = Astro.props;
 const t = useTranslations(lang);
 
 const navLinks = [
-  { href: `/${lang}/about`, label: t('nav.about') },
-  { href: `/${lang}/projects`, label: t('nav.projects') },
-  { href: `/${lang}/hobbies`, label: t('nav.hobbies') },
-  { href: `/${lang}/contact`, label: t('nav.contact') },
+  { href: '#about-section', label: t('nav.about') },
+  { href: '#projects-section', label: t('nav.projects') },
+  { href: '#hobbies-section', label: t('nav.hobbies') },
+  { href: '#contact-section', label: t('nav.contact') },
 ];
 
 const isActive = (href: string) => currentPath === href;
 ---
 
 <nav
-  class="fixed top-0 left-0 right-0 z-50 transition-all duration-200 ease-out opacity-0"
+  class="fixed top-0 left-0 right-0 z-50 transition-all duration-200 ease-out"
   role="navigation"
   aria-label="Main navigation"
   id="main-nav"
@@ -31,7 +31,7 @@ const isActive = (href: string) => currentPath === href;
       <!-- Logo -->
       <a
         href={`/${lang}`}
-        class="text-xl font-bold text-text-primary hover:text-accent-primary transition-colors duration-200 focus:outline-none focus:ring-2 focus:ring-accent-primary focus:ring-offset-2 focus:ring-offset-bg-primary"
+        class="text-xl font-bold text-accent-primary hover:text-accent-secondary transition-colors duration-200 focus:outline-none focus:ring-2 focus:ring-accent-primary focus:ring-offset-2 focus:ring-offset-bg-primary"
         aria-label="Marc Uson - Home"
       >
         marcuson.dev
@@ -49,6 +49,7 @@ const isActive = (href: string) => currentPath === href;
                   isActive(href) ? 'text-accent-primary' : ''
                 }`}
                 aria-current={isActive(href) ? 'page' : undefined}
+                onclick={`event.preventDefault(); document.querySelector('${href}')?.scrollIntoView({ behavior: 'smooth' })`}
               >
                 {label}
                 {isActive(href) && (
@@ -60,11 +61,9 @@ const isActive = (href: string) => currentPath === href;
         </div>
 
         <!-- Language Selector -->
-        <div class="flex items-center space-x-2">
-          <span class="text-text-muted text-sm">Lang:</span>
-          <div class="flex items-center space-x-1">
-            {
-              ['en', 'es', 'ca'].map((locale) => (
+        <div class="flex items-center space-x-1">
+          {
+            ['ca', 'es', 'en'].map((locale) => (
                 <a
                   href={`/${locale}${currentPath.replace(/^\/(en|es|ca)/, '')}`}
                   class={`px-2 py-1 text-sm font-medium rounded transition-colors duration-200 focus:outline-none focus:ring-2 focus:ring-accent-primary focus:ring-offset-2 focus:ring-offset-bg-primary ${
@@ -78,14 +77,13 @@ const isActive = (href: string) => currentPath === href;
                 </a>
               ))
             }
-          </div>
         </div>
 
         <!-- Download CV Button -->
         <a
           href="/assets/cv/marcuson.pdf"
           download
-          class="inline-flex items-center px-4 py-2 bg-accent-primary text-bg-primary font-medium rounded-lg hover:bg-accent-secondary hover:scale-105 transition-all duration-200 focus:outline-none focus:ring-2 focus:ring-accent-primary focus:ring-offset-2 focus:ring-offset-bg-primary"
+          class="inline-flex items-center px-4 py-2 bg-accent-primary text-black font-medium rounded-lg hover:bg-accent-secondary hover:scale-105 transition-all duration-200 focus:outline-none focus:ring-2 focus:ring-accent-primary focus:ring-offset-2 focus:ring-offset-bg-primary"
           aria-label={t('nav.downloadCV')}
         >
           <svg
@@ -147,6 +145,7 @@ const isActive = (href: string) => currentPath === href;
               isActive(href) ? 'text-accent-primary' : ''
             }`}
             aria-current={isActive(href) ? 'page' : undefined}
+            onclick={`event.preventDefault(); document.querySelector('${href}')?.scrollIntoView({ behavior: 'smooth' }); document.getElementById('mobile-menu').style.display = 'none'`}
           >
             {label}
           </a>
@@ -155,10 +154,9 @@ const isActive = (href: string) => currentPath === href;
 
       <!-- Mobile Language Selector -->
       <div class="pt-4 border-t border-border-primary">
-        <span class="block text-text-muted text-sm mb-2">Language:</span>
         <div class="flex space-x-2">
           {
-            ['en', 'es', 'ca'].map((locale) => (
+            ['ca', 'es', 'en'].map((locale) => (
               <a
                 href={`/${locale}${currentPath.replace(/^\/(en|es|ca)/, '')}`}
                 class={`px-3 py-2 text-sm font-medium rounded transition-colors duration-200 focus:outline-none focus:ring-2 focus:ring-accent-primary focus:ring-offset-2 focus:ring-offset-bg-secondary ${
@@ -225,26 +223,22 @@ const isActive = (href: string) => currentPath === href;
     const currentScrollY = window.scrollY;
 
     if (currentScrollY > 16) {
-      // Fade in navbar with glass background
+      // Add glass background when scrolled
       nav?.classList.add(
-        'opacity-100',
-        'bg-glass-bg',
-        'backdrop-blur-12',
+        'bg-gray-800/30',
+        'backdrop-blur-sm',
         'border-b',
-        'border-glass-border',
-        'shadow-glass'
+        'border-white/10',
+        'shadow-lg'
       );
-      nav?.classList.remove('opacity-0');
     } else {
-      // Fade out navbar at top
-      nav?.classList.add('opacity-0');
+      // Remove glass background at top
       nav?.classList.remove(
-        'opacity-100',
-        'bg-glass-bg',
-        'backdrop-blur-12',
+        'bg-gray-800/30',
+        'backdrop-blur-sm',
         'border-b',
-        'border-glass-border',
-        'shadow-glass'
+        'border-white/10',
+        'shadow-lg'
       );
     }
 

@@ -4,30 +4,6 @@ export default {
   content: ['./src/**/*.{astro,html,js,jsx,md,mdx,ts,tsx}'],
   theme: {
     extend: {
-      colors: {
-        // Primary backgrounds
-        'bg-primary': '#0B0F14',
-        'bg-secondary': '#111827',
-        'bg-tertiary': '#1F2937',
-
-        // Text colors
-        'text-primary': '#E5E7EB',
-        'text-secondary': '#9CA3AF',
-        'text-muted': '#6B7280',
-
-        // Border colors
-        'border-primary': 'rgba(255, 255, 255, 0.08)',
-        'border-secondary': 'rgba(255, 255, 255, 0.05)',
-
-        // Accent colors
-        'accent-primary': '#84CC16',
-        'accent-secondary': '#65A30D',
-        'accent-tertiary': '#A3E635',
-
-        // Glass effect
-        'glass-bg': 'rgba(17, 17, 17, 0.6)',
-        'glass-border': 'rgba(255, 255, 255, 0.08)',
-      },
       fontFamily: {
         sans: ['Inter', 'system-ui', 'sans-serif'],
         mono: ['JetBrains Mono', 'Fira Code', 'monospace'],

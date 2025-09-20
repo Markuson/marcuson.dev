@@ -11,7 +11,7 @@ const { lang } = Astro.props;
 const t = useTranslations(lang);
 ---
 
-<section class="relative min-h-screen flex items-center justify-center overflow-hidden">
+<section class="relative h-screen flex items-center justify-center overflow-hidden bg-bg-primary">
   <!-- Hero Background SVG -->
   <div class="absolute inset-0">
     <img
@@ -23,20 +23,20 @@ const t = useTranslations(lang);
   </div>
 
   <!-- Hero Content -->
-  <Container as="div" class="relative z-10 text-center">
+  <Container as="div" class="relative z-10 text-center px-8">
     <div class="max-w-4xl mx-auto">
       <!-- Main Title -->
-      <h1 class="text-hero-title lg:text-hero-title-lg font-bold text-text-primary mb-6 leading-tight">
+      <h1 class="text-4xl md:text-5xl lg:text-6xl font-bold text-text-primary mb-8 leading-tight px-4">
         {t('hero.title')}
       </h1>
 
       <!-- Subtitle 1 -->
-      <p class="text-xl lg:text-2xl text-text-secondary mb-4 leading-relaxed max-w-3xl mx-auto">
+      <p class="text-xl lg:text-2xl text-text-secondary mb-6 leading-relaxed max-w-3xl mx-auto px-4">
         {t('hero.subtitle1')}
       </p>
 
       <!-- Subtitle 2 -->
-      <p class="text-lg lg:text-xl text-text-muted mb-8 leading-relaxed max-w-2xl mx-auto">
+      <p class="text-lg lg:text-xl text-text-muted mb-12 leading-relaxed max-w-2xl mx-auto px-4">
         {t('hero.subtitle2')}
       </p>
 
@@ -46,7 +46,7 @@ const t = useTranslations(lang);
         <a
           href="/assets/cv/marcuson.pdf"
           download
-          class="inline-flex items-center px-8 py-4 bg-accent-primary text-bg-primary font-semibold rounded-lg hover:bg-accent-secondary hover:scale-105 transition-all duration-200 focus:outline-none focus:ring-2 focus:ring-accent-primary focus:ring-offset-2 focus:ring-offset-bg-primary w-full sm:w-auto justify-center shadow-lg"
+          class="inline-flex items-center px-8 py-4 bg-accent-primary text-black font-semibold rounded-lg hover:bg-accent-secondary hover:scale-105 transition-all duration-200 focus:outline-none focus:ring-2 focus:ring-accent-primary focus:ring-offset-2 focus:ring-offset-bg-primary w-full sm:w-auto justify-center shadow-lg"
           aria-label={t('hero.downloadCV')}
         >
           <svg
@@ -146,24 +146,25 @@ const t = useTranslations(lang);
         </a>
       </div>
 
-      <!-- Scroll Indicator -->
-      <div class="animate-bounce">
-        <button
-          onclick="document.getElementById('about-section')?.scrollIntoView({ behavior: 'smooth' })"
-          class="p-2 text-text-muted hover:text-accent-primary transition-colors duration-200 focus:outline-none focus:ring-2 focus:ring-accent-primary focus:ring-offset-2 focus:ring-offset-bg-primary rounded-lg"
-          aria-label="Scroll to content"
-          title="Scroll down"
-        >
-          <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true">
-            <path
-              stroke-linecap="round"
-              stroke-linejoin="round"
-              stroke-width="2"
-              d="M19 14l-7 7m0 0l-7-7m7 7V3"
-            />
-          </svg>
-        </button>
-      </div>
     </div>
   </Container>
+
+  <!-- Scroll Indicator -->
+  <div class="absolute bottom-8 left-1/2 transform -translate-x-1/2 animate-bounce">
+    <button
+      onclick="document.getElementById('about-section')?.scrollIntoView({ behavior: 'smooth' })"
+      class="p-2 text-text-muted hover:text-accent-primary transition-colors duration-200 focus:outline-none focus:ring-2 focus:ring-accent-primary focus:ring-offset-2 focus:ring-offset-bg-primary rounded-lg"
+      aria-label="Scroll to content"
+      title="Scroll down"
+    >
+      <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true">
+        <path
+          stroke-linecap="round"
+          stroke-linejoin="round"
+          stroke-width="2"
+          d="M19 14l-7 7m0 0l-7-7m7 7V3"
+        />
+      </svg>
+    </button>
+  </div>
 </section>
