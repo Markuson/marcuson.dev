@@ -91,7 +91,7 @@ const getStatusColor = (status: string) => {
     />
 
     <!-- Projects Grid -->
-    <div class="grid md:grid-cols-2 xl:grid-cols-3 gap-8 mb-12">
+    <div class="grid md:grid-cols-2 xl:grid-cols-3 gap-8 mb-12" role="region" aria-label="Featured projects">
       {mockProjects.map((project) => (
         <article class="bg-bg-secondary rounded-lg p-6 transition-all duration-200 shadow-card hover:shadow-lg hover:-translate-y-1 border border-border-primary group flex flex-col h-full">
           <!-- Badges -->
@@ -111,7 +111,7 @@ const getStatusColor = (status: string) => {
           </p>
 
           <!-- Tech Stack -->
-          <div class="flex flex-wrap gap-1 mb-6" role="list">
+          <div class="flex flex-wrap gap-1 mb-6" role="list" aria-label="Technologies used">
             {project.tech.map((tech) => (
               <Chip text={tech} />
             ))}
@@ -121,13 +121,13 @@ const getStatusColor = (status: string) => {
           <div class="flex-grow"></div>
 
           <!-- Action Buttons -->
-          <div class="flex gap-3">
+          <div class="flex gap-3" role="group" aria-label="Project actions">
             {project.codeUrl && (
               <a
                 href={project.codeUrl}
                 target="_blank"
                 rel="noopener noreferrer"
-                class="flex-1 inline-flex items-center justify-center px-3 py-2 text-sm font-medium text-text-secondary hover:text-accent-primary border border-border-primary hover:border-accent-primary rounded transition-colors duration-200 focus:outline-none focus:ring-2 focus:ring-accent-primary focus:ring-offset-2 focus:ring-offset-bg-secondary"
+                class="flex-1 inline-flex items-center justify-center px-3 py-3 text-sm font-medium text-text-secondary hover:text-accent-primary border border-border-primary hover:border-accent-primary rounded transition-colors duration-200 focus:outline-none focus:ring-2 focus:ring-accent-primary focus:ring-offset-2 focus:ring-offset-bg-secondary min-h-[44px]"
                 aria-label={`View ${project.title} code`}
               >
                 <svg class="w-4 h-4 mr-2" fill="currentColor" viewBox="0 0 20 20" aria-hidden="true">
@@ -142,7 +142,7 @@ const getStatusColor = (status: string) => {
                 href={project.demoUrl}
                 target="_blank"
                 rel="noopener noreferrer"
-                class="flex-1 inline-flex items-center justify-center px-3 py-2 text-sm font-medium bg-accent-primary text-bg-primary hover:bg-accent-secondary rounded transition-colors duration-200 focus:outline-none focus:ring-2 focus:ring-accent-primary focus:ring-offset-2 focus:ring-offset-bg-secondary"
+                class="flex-1 inline-flex items-center justify-center px-3 py-3 text-sm font-medium bg-accent-primary text-bg-primary hover:bg-accent-secondary rounded transition-colors duration-200 focus:outline-none focus:ring-2 focus:ring-accent-primary focus:ring-offset-2 focus:ring-offset-bg-secondary min-h-[44px]"
                 aria-label={`View ${project.title} demo`}
               >
                 <svg class="w-4 h-4 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true">
@@ -153,7 +153,7 @@ const getStatusColor = (status: string) => {
             )}
 
             {!project.codeUrl && (
-              <div class="flex-1 inline-flex items-center justify-center px-3 py-2 text-sm font-medium text-text-muted bg-bg-tertiary rounded cursor-not-allowed">
+              <div class="flex-1 inline-flex items-center justify-center px-3 py-3 text-sm font-medium text-text-muted bg-bg-tertiary rounded cursor-not-allowed min-h-[44px]">
                 <svg class="w-4 h-4 mr-2" fill="currentColor" viewBox="0 0 20 20" aria-hidden="true">
                   <path fill-rule="evenodd" d="M12.316 3.051a1 1 0 01.633 1.265l-4 12a1 1 0 11-1.898-.632l4-12a1 1 0 011.265-.633zM5.707 6.293a1 1 0 010 1.414L3.414 10l2.293 2.293a1 1 0 11-1.414 1.414l-3-3a1 1 0 010-1.414l3-3a1 1 0 011.414 0zm8.586 0a1 1 0 011.414 0l3 3a1 1 0 010 1.414l-3 3a1 1 0 11-1.414-1.414L16.586 10l-2.293-2.293a1 1 0 010-1.414z" clip-rule="evenodd" />
                 </svg>
@@ -166,12 +166,12 @@ const getStatusColor = (status: string) => {
     </div>
 
     <!-- View All Projects CTA -->
-    <div class="text-center">
+    <div class="text-center" role="region" aria-label="Additional projects">
       <a
         href="https://github.com/Markuson"
         target="_blank"
         rel="noopener noreferrer"
-        class="inline-flex items-center px-6 py-3 border-2 border-accent-primary text-accent-primary font-medium rounded-lg hover:bg-accent-primary hover:text-bg-primary transition-all duration-200 focus:outline-none focus:ring-2 focus:ring-accent-primary focus:ring-offset-2 focus:ring-offset-bg-primary"
+        class="inline-flex items-center px-6 py-4 border-2 border-accent-primary text-accent-primary font-medium rounded-lg hover:bg-accent-primary hover:text-bg-primary transition-all duration-200 focus:outline-none focus:ring-2 focus:ring-accent-primary focus:ring-offset-2 focus:ring-offset-bg-primary min-h-[48px]"
       >
         <svg class="w-5 h-5 mr-2" fill="currentColor" viewBox="0 0 20 20" aria-hidden="true">
           <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-8.293l-3-3a1 1 0 00-1.414 1.414L10.586 9H7a1 1 0 100 2h3.586l-1.293 1.293a1 1 0 101.414 1.414l3-3a1 1 0 000-1.414z" clip-rule="evenodd" />

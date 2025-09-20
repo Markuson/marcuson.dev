@@ -221,10 +221,20 @@ const isActive = (href: string) => currentPath === href;
   const mobileMenu = document.getElementById('mobile-menu');
 
   if (mobileMenuButton && mobileMenu) {
-    mobileMenuButton.addEventListener('click', () => {
+    const toggleMobileMenu = () => {
       const isOpen = mobileMenu.style.display !== 'none';
       mobileMenu.style.display = isOpen ? 'none' : 'block';
       mobileMenuButton.setAttribute('aria-expanded', (!isOpen).toString());
+    };
+
+    mobileMenuButton.addEventListener('click', toggleMobileMenu);
+
+    // Keyboard support for mobile menu
+    mobileMenuButton.addEventListener('keydown', (event) => {
+      if (event.key === 'Enter' || event.key === ' ') {
+        event.preventDefault();
+        toggleMobileMenu();
+      }
     });
   }
 
@@ -233,17 +243,40 @@ const isActive = (href: string) => currentPath === href;
   const languageDropdown = document.getElementById('language-dropdown');
 
   if (languageButton && languageDropdown) {
-    languageButton.addEventListener('click', () => {
+    const toggleLanguageDropdown = () => {
       const isOpen = languageDropdown.style.display !== 'none';
       languageDropdown.style.display = isOpen ? 'none' : 'block';
       languageButton.setAttribute('aria-expanded', (!isOpen).toString());
+    };
+
+    const closeLanguageDropdown = () => {
+      languageDropdown.style.display = 'none';
+      languageButton.setAttribute('aria-expanded', 'false');
+    };
+
+    languageButton.addEventListener('click', toggleLanguageDropdown);
+
+    // Keyboard support for language dropdown
+    languageButton.addEventListener('keydown', (event) => {
+      if (event.key === 'Enter' || event.key === ' ') {
+        event.preventDefault();
+        toggleLanguageDropdown();
+      } else if (event.key === 'Escape') {
+        closeLanguageDropdown();
+      }
     });
 
     // Close dropdown when clicking outside
     document.addEventListener('click', (event) => {
       if (!languageButton.contains(event.target as Node) && !languageDropdown.contains(event.target as Node)) {
-        languageDropdown.style.display = 'none';
-        languageButton.setAttribute('aria-expanded', 'false');
+        closeLanguageDropdown();
+      }
+    });
+
+    // Close dropdown on escape key globally
+    document.addEventListener('keydown', (event) => {
+      if (event.key === 'Escape') {
+        closeLanguageDropdown();
       }
     });
   }

@@ -12,9 +12,9 @@
 
 # Core Components
 
-- **NavBar**: text logo “marcuson.dev”; links About/Projects/Hobbies/Contact; LanguageSelector; “Download CV” button; ThemeToggle.
+- **NavBar**: text logo “marcuson.dev”; links About/Projects/Hobbies/Contact; LanguageSelector; “Download CV” button; ~~ThemeToggle~~.
 - **LanguageSelector**: CA/EN/ES labels. Tooltip: “Change language”.
-- **ThemeToggle**: system default. User override persists.
+- ~~**ThemeToggle**: system default. User override persists.~~
 - **CTA Button Primary**: label “Download CV”, leading download icon. Emphasis.
 - **CTA Button Secondary**: outline “View Projects”.
 - **SocialIconGroup**: GitHub, LinkedIn, email. Tooltips. New tab except email.
@@ -64,7 +64,7 @@
 # Mobile, Web App, Desktop
 
 - Mobile (<768 px): stacked nav with hamburger; language and theme inside sheet; CTAs full width; grids 1 col; larger tap targets.
-- Tablet (≥768 px): 2-col grids; inline language selector; theme toggle in navbar.
+- Tablet (≥768 px): 2-col grids; inline language selector; ~~theme toggle in navbar~~.
 - Desktop (≥1280 px): 3-col projects; hobbies 2×2; hero H1 split into two lines.
 - Sticky nav only after reveal on all breakpoints.
 

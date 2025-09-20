@@ -20,10 +20,10 @@
 
 ## Interactions & Behavior
 
-- [ ] Add navbar scroll behavior (fade-in with glass background)
-- [ ] Implement responsive design for mobile, tablet, and desktop
-- [ ] Add accessibility features (ARIA labels, keyboard navigation, focus states)
-- [ ] Implement theme toggle with system preference detection
+- [x] Add navbar scroll behavior (fade-in with glass background)
+- [x] Implement responsive design for mobile, tablet, and desktop
+- [x] Add accessibility features (ARIA labels, keyboard navigation, focus states)
+- [ ] ~~Implement theme toggle with system preference detection~~ (ON HOLD)
 
 ## Deployment & Infrastructure
 
@@ -41,7 +41,7 @@
 ## Required Assets from PO
 
 - [ ] Actual CV PDF (`/assets/cv/marcuson.pdf`)
-- [ ] Hero background SVG (isometric tech illustration)
+- [x] Hero background SVG (isometric tech illustration)
 - [ ] Professional headshot/profile image
 - [ ] Project screenshots/mockups for portfolio
 - [ ] Google Analytics 4 Measurement ID
