@@ -40,12 +40,26 @@
 # Visual Design Elements & Color Scheme
 
 - Theme: dark. Soft corners and shadows.
-- Accent: **Lime `#84CC16`** for CTAs, active links, badges.
-- Neutrals: text `#E5E7EB`, muted `#9CA3AF`, surfaces `#0B0F14` / `#111827` / `#1F2937`.
-- Borders: `rgba(255,255,255,0.08)`. Focus ring: accent or white at 2 px min.
-- Hero background: monochrome isometric tech illustration. Low contrast behind text.
-- Icons: outline style. Email icon filled when hover.
-- Elevation: shadow at rest subtle, on hover medium.
+- **Color Palette (Updated)**:
+  - **Primary Accent**: `#28E07A` (modern green) for CTAs, active links, badges
+  - **Secondary Accent**: `#1CC367` (darker green) for hover states and active elements
+  - **Tertiary Accent**: `#4CE590` (lighter green) for highlights and soft interactions
+  - **Backgrounds**:
+    - Primary: `#0A0D11` (darkest)
+    - Secondary: `#10151B` (surface cards)
+    - Tertiary: `#172028` (muted surfaces)
+    - Contrast: `#0C1116` (sections alternating)
+  - **Text Colors**:
+    - Primary: `#E3EAF2` (main text)
+    - Secondary: `#BDCADD` (subheadings)
+    - Muted: `#90A0B3` (meta text)
+  - **Borders**:
+    - Primary: `#2A3440` (main borders)
+    - Secondary: `#1F2A35` (subtle borders)
+- Focus ring: accent primary at 2px minimum.
+- Hero background: tech-inspired illustration with code editors, terminals, circuits, and AI elements. Low contrast behind text.
+- Icons: Contact cards use rounded icons with tertiary backgrounds; Hobby cards use outline style with primary color.
+- Elevation: shadow at rest subtle, on hover medium with slight lift.
 
 # Mobile, Web App, Desktop
 
