@@ -1,4 +1,4 @@
-module.exports = {
+const config = {
   ci: {
     collect: {
       // Build the site before running Lighthouse
@@ -54,3 +54,5 @@ module.exports = {
     }
   }
 };
+
+export default config;
