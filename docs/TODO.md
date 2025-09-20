@@ -10,13 +10,13 @@
 
 ## Core Layout & Components
 
-- [ ] Create base layout with responsive container and navigation structure
-- [ ] Implement Hero section with CTAs and social links
-- [ ] Add placeholder hero background SVG and isometric design _(requires PO assets)_
-- [ ] Implement About section with skills chips and experience timeline
-- [ ] Create Featured Projects section with 3x2 card grid
-- [ ] Implement Hobbies & Making section with 2x2 card layout
-- [ ] Create Contact section with email, social, and availability cards
+- [x] Create base layout with responsive container and navigation structure
+- [x] Implement Hero section with CTAs and social links
+- [x] Add placeholder hero background SVG and isometric design _(requires PO assets)_
+- [x] Implement About section with skills chips and experience timeline
+- [x] Create Featured Projects section with 3x2 card grid
+- [x] Implement Hobbies & Making section with 2x2 card layout
+- [x] Create Contact section with email, social, and availability cards
 
 ## Interactions & Behavior
 

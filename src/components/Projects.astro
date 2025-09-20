@@ -1,0 +1,183 @@
+---
+import Container from '@/components/Container.astro';
+import SectionHeader from '@/components/SectionHeader.astro';
+import Chip from '@/components/Chip.astro';
+import Badge from '@/components/Badge.astro';
+import type { Language } from '@/utils/i18n';
+import { useTranslations } from '@/utils/i18n';
+import { getCollection } from 'astro:content';
+
+export interface Props {
+  lang: Language;
+}
+
+const { lang } = Astro.props;
+const t = useTranslations(lang);
+
+// Get featured projects (mock data for now)
+const mockProjects = [
+  {
+    title: 'AI Code Assistant',
+    category: 'AI Development',
+    status: 'Featured',
+    description: 'A VS Code extension that provides intelligent code suggestions and automated refactoring using OpenAI\'s GPT models.',
+    tech: ['TypeScript', 'OpenAI API', 'VS Code Extensions', 'React'],
+    codeUrl: 'https://github.com/Markuson/ai-code-assistant',
+    demoUrl: 'https://marketplace.visualstudio.com/items?itemName=marcuson.ai-assistant',
+  },
+  {
+    title: 'IoT Dashboard',
+    category: 'Full-Stack',
+    status: 'Live',
+    description: 'Real-time dashboard for monitoring and controlling IoT devices with WebSocket connections and MQTT protocol integration.',
+    tech: ['React', 'Node.js', 'WebSocket', 'Arduino', 'MQTT'],
+    codeUrl: 'https://github.com/Markuson/iot-dashboard',
+    demoUrl: 'https://iot-demo.marcuson.dev',
+  },
+  {
+    title: '3D Print Optimizer',
+    category: 'AI/ML',
+    status: 'Open Source',
+    description: 'Machine learning model that optimizes 3D printing parameters for better quality and reduced material waste.',
+    tech: ['Python', 'TensorFlow', 'OpenCV', 'Flask'],
+    codeUrl: 'https://github.com/Markuson/3d-print-optimizer',
+  },
+  {
+    title: 'Smart Home Hub',
+    category: 'Hardware',
+    status: 'Prototype',
+    description: 'Central control system for IoT devices with mobile app interface and voice control integration.',
+    tech: ['React Native', 'Raspberry Pi', 'KiCad', 'Python'],
+    codeUrl: 'https://github.com/Markuson/smart-home-hub',
+  },
+  {
+    title: 'VibeCoding Toolkit',
+    category: 'Research',
+    status: 'In Development',
+    description: 'Development environment tools that adapt to developer mood and productivity patterns using AI.',
+    tech: ['Electron', 'Machine Learning', 'Node.js', 'Real-time Analytics'],
+  },
+  {
+    title: 'E-commerce Platform',
+    category: 'Web Development',
+    status: 'Client Project',
+    description: 'Full-stack e-commerce solution with payment processing, inventory management, and analytics.',
+    tech: ['Next.js', 'Stripe', 'PostgreSQL', 'Tailwind CSS'],
+    demoUrl: 'https://shop-demo.marcuson.dev',
+  },
+];
+
+const getStatusColor = (status: string) => {
+  const colors = {
+    'Featured': 'bg-accent-primary text-bg-primary',
+    'Live': 'bg-green-500 text-white',
+    'Open Source': 'bg-blue-500 text-white',
+    'Prototype': 'bg-yellow-500 text-bg-primary',
+    'In Development': 'bg-orange-500 text-white',
+    'Client Project': 'bg-purple-500 text-white',
+    'Private': 'bg-gray-500 text-white',
+  };
+  return colors[status as keyof typeof colors] || 'bg-gray-500 text-white';
+};
+---
+
+<section id="projects-section" class="py-20 lg:py-32 bg-bg-contrast">
+  <Container>
+    <SectionHeader
+      title={t('projects.title')}
+      subtitle={t('projects.subtitle')}
+      centered={true}
+      class="mb-16"
+    />
+
+    <!-- Projects Grid -->
+    <div class="grid md:grid-cols-2 xl:grid-cols-3 gap-8 mb-12">
+      {mockProjects.map((project) => (
+        <article class="bg-bg-secondary rounded-lg p-6 transition-all duration-200 shadow-card hover:shadow-lg hover:-translate-y-1 border border-border-primary group flex flex-col h-full">
+          <!-- Badges -->
+          <div class="flex items-center gap-2 mb-4">
+            <Badge text={project.category} variant="default" />
+            <Badge text={project.status} variant="status" class={getStatusColor(project.status)} />
+          </div>
+
+          <!-- Title -->
+          <h3 class="text-card-title font-semibold text-text-primary mb-3">
+            {project.title}
+          </h3>
+
+          <!-- Description -->
+          <p class="text-text-secondary text-sm leading-relaxed mb-4">
+            {project.description}
+          </p>
+
+          <!-- Tech Stack -->
+          <div class="flex flex-wrap gap-1 mb-6" role="list">
+            {project.tech.map((tech) => (
+              <Chip text={tech} />
+            ))}
+          </div>
+
+          <!-- Spacer to push buttons to bottom -->
+          <div class="flex-grow"></div>
+
+          <!-- Action Buttons -->
+          <div class="flex gap-3">
+            {project.codeUrl && (
+              <a
+                href={project.codeUrl}
+                target="_blank"
+                rel="noopener noreferrer"
+                class="flex-1 inline-flex items-center justify-center px-3 py-2 text-sm font-medium text-text-secondary hover:text-accent-primary border border-border-primary hover:border-accent-primary rounded transition-colors duration-200 focus:outline-none focus:ring-2 focus:ring-accent-primary focus:ring-offset-2 focus:ring-offset-bg-secondary"
+                aria-label={`View ${project.title} code`}
+              >
+                <svg class="w-4 h-4 mr-2" fill="currentColor" viewBox="0 0 20 20" aria-hidden="true">
+                  <path fill-rule="evenodd" d="M12.316 3.051a1 1 0 01.633 1.265l-4 12a1 1 0 11-1.898-.632l4-12a1 1 0 011.265-.633zM5.707 6.293a1 1 0 010 1.414L3.414 10l2.293 2.293a1 1 0 11-1.414 1.414l-3-3a1 1 0 010-1.414l3-3a1 1 0 011.414 0zm8.586 0a1 1 0 011.414 0l3 3a1 1 0 010 1.414l-3 3a1 1 0 11-1.414-1.414L16.586 10l-2.293-2.293a1 1 0 010-1.414z" clip-rule="evenodd" />
+                </svg>
+                Code
+              </a>
+            )}
+
+            {project.demoUrl && (
+              <a
+                href={project.demoUrl}
+                target="_blank"
+                rel="noopener noreferrer"
+                class="flex-1 inline-flex items-center justify-center px-3 py-2 text-sm font-medium bg-accent-primary text-bg-primary hover:bg-accent-secondary rounded transition-colors duration-200 focus:outline-none focus:ring-2 focus:ring-accent-primary focus:ring-offset-2 focus:ring-offset-bg-secondary"
+                aria-label={`View ${project.title} demo`}
+              >
+                <svg class="w-4 h-4 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14" />
+                </svg>
+                Demo
+              </a>
+            )}
+
+            {!project.codeUrl && (
+              <div class="flex-1 inline-flex items-center justify-center px-3 py-2 text-sm font-medium text-text-muted bg-bg-tertiary rounded cursor-not-allowed">
+                <svg class="w-4 h-4 mr-2" fill="currentColor" viewBox="0 0 20 20" aria-hidden="true">
+                  <path fill-rule="evenodd" d="M12.316 3.051a1 1 0 01.633 1.265l-4 12a1 1 0 11-1.898-.632l4-12a1 1 0 011.265-.633zM5.707 6.293a1 1 0 010 1.414L3.414 10l2.293 2.293a1 1 0 11-1.414 1.414l-3-3a1 1 0 010-1.414l3-3a1 1 0 011.414 0zm8.586 0a1 1 0 011.414 0l3 3a1 1 0 010 1.414l-3 3a1 1 0 11-1.414-1.414L16.586 10l-2.293-2.293a1 1 0 010-1.414z" clip-rule="evenodd" />
+                </svg>
+                Private
+              </div>
+            )}
+          </div>
+        </article>
+      ))}
+    </div>
+
+    <!-- View All Projects CTA -->
+    <div class="text-center">
+      <a
+        href="https://github.com/Markuson"
+        target="_blank"
+        rel="noopener noreferrer"
+        class="inline-flex items-center px-6 py-3 border-2 border-accent-primary text-accent-primary font-medium rounded-lg hover:bg-accent-primary hover:text-bg-primary transition-all duration-200 focus:outline-none focus:ring-2 focus:ring-accent-primary focus:ring-offset-2 focus:ring-offset-bg-primary"
+      >
+        <svg class="w-5 h-5 mr-2" fill="currentColor" viewBox="0 0 20 20" aria-hidden="true">
+          <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-8.293l-3-3a1 1 0 00-1.414 1.414L10.586 9H7a1 1 0 100 2h3.586l-1.293 1.293a1 1 0 101.414 1.414l3-3a1 1 0 000-1.414z" clip-rule="evenodd" />
+        </svg>
+        View All Projects on GitHub
+      </a>
+    </div>
+  </Container>
+</section>
