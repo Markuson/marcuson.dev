@@ -22,11 +22,28 @@ export default defineConfig({
   ],
   vite: {
     plugins: [tailwindcss()],
+    build: {
+      // Optimize for production
+      minify: 'esbuild',
+      cssMinify: true,
+      rollupOptions: {
+        output: {
+          // Manual chunks for better caching
+          manualChunks: {
+            vendor: ['react', 'react-dom']
+          }
+        }
+      }
+    }
   },
   output: 'static',
   trailingSlash: 'never',
   build: {
     format: 'directory',
+    // Inline small assets
+    inlineStylesheets: 'auto',
+    // Assets optimization
+    assets: '_astro'
   },
   i18n: {
     defaultLocale: 'en',

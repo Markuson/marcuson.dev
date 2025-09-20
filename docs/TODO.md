@@ -34,9 +34,9 @@
 
 ## Quality & Performance
 
-- [ ] Set up Lighthouse CI with performance budgets
-- [ ] Add performance optimizations (lazy loading, image optimization, code splitting)
-- [ ] Add security headers and Content Security Policy
+- [x] Set up Lighthouse CI with performance budgets
+- [x] Add performance optimizations (lazy loading, image optimization, code splitting)
+- [x] Add security headers and Content Security Policy
 
 ## Required Assets from PO
 
