@@ -27,10 +27,10 @@
 
 ## Deployment & Infrastructure
 
-- [ ] Create Edge Middleware for language detection and redirection
+- [x] Create Edge Middleware for language detection and redirection
 - [ ] Add placeholder CV PDF and configure download functionality _(requires PO CV PDF)_
-- [ ] Implement SEO meta tags, Open Graph, and sitemap generation
-- [ ] Configure Vercel deployment with proper redirects and caching
+- [x] Implement SEO meta tags, Open Graph, and sitemap generation
+- [x] Configure Vercel deployment with proper redirects and caching
 
 ## Quality & Performance
 
@@ -43,7 +43,7 @@
 - [ ] Actual CV PDF (`/assets/cv/marcuson.pdf`)
 - [x] Hero background SVG (isometric tech illustration)
 - [ ] Professional headshot/profile image
-- [ ] Project screenshots/mockups for portfolio
+- [x] Project screenshots/mockups for portfolio
 - [ ] Google Analytics 4 Measurement ID
 
 ## Content Requirements
