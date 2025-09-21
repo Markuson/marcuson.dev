@@ -1,22 +1,44 @@
 ---
 import Layout from '@/layouts/Layout.astro';
-import Hero from '@/components/Hero.astro';
-import About from '@/components/About.astro';
-import Projects from '@/components/Projects.astro';
-import Hobbies from '@/components/Hobbies.astro';
-import Contact from '@/components/Contact.astro';
+import Hero from '@/sections/Hero.astro';
+import About from '@/sections/About.astro';
+import Projects from '@/sections/Projects.astro';
+import Hobbies from '@/sections/Hobbies.astro';
+import Contact from '@/sections/Contact.astro';
+import { getEntry } from 'astro:content';
+
+const lang = 'ca';
+const homeEntry = await getEntry('home', lang);
+const fallbackEntry = lang === 'en' ? homeEntry : await getEntry('home', 'en');
+const meta = homeEntry?.data ?? fallbackEntry?.data ?? {
+  title: 'Marc Uson - Desenvolupador Full-Stack i Entusiasta de la IA',
+  description:
+    "Ex-enginyer d'automatització industrial convertit en desenvolupador full-stack especialitzat en React, Node.js, IoT i IA. Construint solucions innovadores que connecten els mons digital i físic.",
+  keywords: [
+    'Desenvolupador Full-Stack',
+    'Enginyer IA',
+    'Desenvolupador IoT',
+    'Desenvolupador React',
+    'Node.js',
+    'TypeScript',
+    'Aprenentatge Automàtic',
+    'Automatització Industrial',
+    'Uppsala Suècia',
+  ],
+  type: 'profile',
+};
 ---
 
 <Layout
-  title="Marc Uson - Desenvolupador Full-Stack i Entusiasta de la IA"
-  description="Ex-enginyer d'automatització industrial convertit en desenvolupador full-stack especialitzat en React, Node.js, IoT i IA. Construint solucions innovadores que connecten els mons digital i físic."
-  lang="ca"
-  type="profile"
-  keywords={['Desenvolupador Full-Stack', 'Enginyer IA', 'Desenvolupador IoT', 'Desenvolupador React', 'Node.js', 'TypeScript', 'Aprenentatge Automàtic', 'Automatització Industrial', 'Uppsala Suècia']}
+  title={meta.title}
+  description={meta.description}
+  lang={lang}
+  type={meta.type}
+  keywords={meta.keywords}
 >
-  <Hero lang="ca" />
-  <About lang="ca" />
-  <Projects lang="ca" />
-  <Hobbies lang="ca" />
-  <Contact lang="ca" />
+  <Hero lang={lang} />
+  <About lang={lang} />
+  <Projects lang={lang} />
+  <Hobbies lang={lang} />
+  <Contact lang={lang} />
 </Layout>

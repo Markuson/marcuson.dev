@@ -1,0 +1,20 @@
+---
+lang: en
+title: 3D Printing
+description: >-
+  Creating functional prototypes and artistic pieces using various 3D printing technologies and materials.
+highlights:
+  - Custom enclosures for electronics projects
+  - Miniatures and artistic sculptures
+  - Functional parts for IoT devices
+  - Parametric design in Fusion 360
+tools:
+  - Ender 3 Pro
+  - Elegoo Mars
+  - PLA/PETG/Resin
+  - Fusion 360
+order: 1
+icon: printing
+---
+
+Exploring additive manufacturing techniques from design to finished piece.

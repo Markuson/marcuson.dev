@@ -1,11 +1,12 @@
 ---
-import Container from '@/components/Container.astro';
-import SectionHeader from '@/components/SectionHeader.astro';
-import Chip from '@/components/Chip.astro';
-import Badge from '@/components/Badge.astro';
+import Container from '@/components/layout/Container.astro';
+import SectionHeader from '@/components/data-display/SectionHeader.astro';
+import Chip from '@/components/data-display/Chip.astro';
+import Badge from '@/components/data-display/Badge.astro';
 import type { Language } from '@/utils/i18n';
 import { useTranslations } from '@/utils/i18n';
 import { getCollection } from 'astro:content';
+import Icon from '@/components/ui/Icon.astro';
 
 export interface Props {
   lang: Language;
@@ -14,58 +15,20 @@ export interface Props {
 const { lang } = Astro.props;
 const t = useTranslations(lang);
 
-// Get featured projects (mock data for now)
-const mockProjects = [
-  {
-    title: 'AI Code Assistant',
-    category: 'AI Development',
-    status: 'Featured',
-    description: 'A VS Code extension that provides intelligent code suggestions and automated refactoring using OpenAI\'s GPT models.',
-    tech: ['TypeScript', 'OpenAI API', 'VS Code Extensions', 'React'],
-    codeUrl: 'https://github.com/Markuson/ai-code-assistant',
-    demoUrl: 'https://marketplace.visualstudio.com/items?itemName=marcuson.ai-assistant',
-  },
-  {
-    title: 'IoT Dashboard',
-    category: 'Full-Stack',
-    status: 'Live',
-    description: 'Real-time dashboard for monitoring and controlling IoT devices with WebSocket connections and MQTT protocol integration.',
-    tech: ['React', 'Node.js', 'WebSocket', 'Arduino', 'MQTT'],
-    codeUrl: 'https://github.com/Markuson/iot-dashboard',
-    demoUrl: 'https://iot-demo.marcuson.dev',
-  },
-  {
-    title: '3D Print Optimizer',
-    category: 'AI/ML',
-    status: 'Open Source',
-    description: 'Machine learning model that optimizes 3D printing parameters for better quality and reduced material waste.',
-    tech: ['Python', 'TensorFlow', 'OpenCV', 'Flask'],
-    codeUrl: 'https://github.com/Markuson/3d-print-optimizer',
-  },
-  {
-    title: 'Smart Home Hub',
-    category: 'Hardware',
-    status: 'Prototype',
-    description: 'Central control system for IoT devices with mobile app interface and voice control integration.',
-    tech: ['React Native', 'Raspberry Pi', 'KiCad', 'Python'],
-    codeUrl: 'https://github.com/Markuson/smart-home-hub',
-  },
-  {
-    title: 'VibeCoding Toolkit',
-    category: 'Research',
-    status: 'In Development',
-    description: 'Development environment tools that adapt to developer mood and productivity patterns using AI.',
-    tech: ['Electron', 'Machine Learning', 'Node.js', 'Real-time Analytics'],
-  },
-  {
-    title: 'E-commerce Platform',
-    category: 'Web Development',
-    status: 'Client Project',
-    description: 'Full-stack e-commerce solution with payment processing, inventory management, and analytics.',
-    tech: ['Next.js', 'Stripe', 'PostgreSQL', 'Tailwind CSS'],
-    demoUrl: 'https://shop-demo.marcuson.dev',
-  },
-];
+const localeProjects = await getCollection('projects', ({ data }) => data.lang === lang);
+const englishProjects = await getCollection('projects', ({ data }) => data.lang === 'en');
+
+const projectMap = new Map<string, (typeof localeProjects)[number]>();
+
+englishProjects.forEach((entry) => {
+  projectMap.set(entry.data.projectId, entry);
+});
+
+localeProjects.forEach((entry) => {
+  projectMap.set(entry.data.projectId, entry);
+});
+
+const projects = Array.from(projectMap.values()).sort((a, b) => a.data.order - b.data.order);
 
 const getStatusColor = (status: string) => {
   const colors = {
@@ -92,7 +55,7 @@ const getStatusColor = (status: string) => {
 
     <!-- Projects Grid -->
     <div class="grid md:grid-cols-2 xl:grid-cols-3 gap-8 mb-12" role="region" aria-label="Featured projects">
-      {mockProjects.map((project) => (
+      {projects.map(({ data: project }) => (
         <article class="bg-bg-secondary rounded-lg p-6 transition-all duration-200 shadow-card hover:shadow-lg hover:-translate-y-1 border border-border-primary group flex flex-col h-full">
           <!-- Badges -->
           <div class="flex items-center gap-2 mb-4">
@@ -130,9 +93,7 @@ const getStatusColor = (status: string) => {
                 class="flex-1 inline-flex items-center justify-center px-3 py-3 text-sm font-medium text-text-secondary hover:text-accent-primary border border-border-primary hover:border-accent-primary rounded transition-colors duration-200 focus:outline-none focus:ring-2 focus:ring-accent-primary focus:ring-offset-2 focus:ring-offset-bg-secondary min-h-[44px]"
                 aria-label={`View ${project.title} code`}
               >
-                <svg class="w-4 h-4 mr-2" fill="currentColor" viewBox="0 0 20 20" aria-hidden="true">
-                  <path fill-rule="evenodd" d="M12.316 3.051a1 1 0 01.633 1.265l-4 12a1 1 0 11-1.898-.632l4-12a1 1 0 011.265-.633zM5.707 6.293a1 1 0 010 1.414L3.414 10l2.293 2.293a1 1 0 11-1.414 1.414l-3-3a1 1 0 010-1.414l3-3a1 1 0 011.414 0zm8.586 0a1 1 0 011.414 0l3 3a1 1 0 010 1.414l-3 3a1 1 0 11-1.414-1.414L16.586 10l-2.293-2.293a1 1 0 010-1.414z" clip-rule="evenodd" />
-                </svg>
+                <Icon name="code" size="sm" class="mr-2" />
                 Code
               </a>
             )}
@@ -145,18 +106,14 @@ const getStatusColor = (status: string) => {
                 class="flex-1 inline-flex items-center justify-center px-3 py-3 text-sm font-medium bg-accent-primary text-bg-primary hover:bg-accent-secondary rounded transition-colors duration-200 focus:outline-none focus:ring-2 focus:ring-accent-primary focus:ring-offset-2 focus:ring-offset-bg-secondary min-h-[44px]"
                 aria-label={`View ${project.title} demo`}
               >
-                <svg class="w-4 h-4 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true">
-                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14" />
-                </svg>
+                <Icon name="external-link" size="sm" class="mr-2" />
                 Demo
               </a>
             )}
 
             {!project.codeUrl && (
               <div class="flex-1 inline-flex items-center justify-center px-3 py-3 text-sm font-medium text-text-muted bg-bg-tertiary rounded cursor-not-allowed min-h-[44px]">
-                <svg class="w-4 h-4 mr-2" fill="currentColor" viewBox="0 0 20 20" aria-hidden="true">
-                  <path fill-rule="evenodd" d="M12.316 3.051a1 1 0 01.633 1.265l-4 12a1 1 0 11-1.898-.632l4-12a1 1 0 011.265-.633zM5.707 6.293a1 1 0 010 1.414L3.414 10l2.293 2.293a1 1 0 11-1.414 1.414l-3-3a1 1 0 010-1.414l3-3a1 1 0 011.414 0zm8.586 0a1 1 0 011.414 0l3 3a1 1 0 010 1.414l-3 3a1 1 0 11-1.414-1.414L16.586 10l-2.293-2.293a1 1 0 010-1.414z" clip-rule="evenodd" />
-                </svg>
+                <Icon name="code" size="sm" class="mr-2" />
                 Private
               </div>
             )}
@@ -173,9 +130,7 @@ const getStatusColor = (status: string) => {
         rel="noopener noreferrer"
         class="inline-flex items-center px-6 py-4 border-2 border-accent-primary text-accent-primary font-medium rounded-lg hover:bg-accent-primary hover:text-bg-primary transition-all duration-200 focus:outline-none focus:ring-2 focus:ring-accent-primary focus:ring-offset-2 focus:ring-offset-bg-primary min-h-[48px]"
       >
-        <svg class="w-5 h-5 mr-2" fill="currentColor" viewBox="0 0 20 20" aria-hidden="true">
-          <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-8.293l-3-3a1 1 0 00-1.414 1.414L10.586 9H7a1 1 0 100 2h3.586l-1.293 1.293a1 1 0 101.414 1.414l3-3a1 1 0 000-1.414z" clip-rule="evenodd" />
-        </svg>
+        <Icon name="arrow-circle-right" size="sm" class="mr-2" />
         View All Projects on GitHub
       </a>
     </div>

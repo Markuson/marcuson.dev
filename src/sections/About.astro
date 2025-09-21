@@ -1,10 +1,11 @@
 ---
-import Container from '@/components/Container.astro';
-import SectionHeader from '@/components/SectionHeader.astro';
-import Chip from '@/components/Chip.astro';
+import Container from '@/components/layout/Container.astro';
+import SectionHeader from '@/components/data-display/SectionHeader.astro';
+import Chip from '@/components/data-display/Chip.astro';
 import type { Language } from '@/utils/i18n';
 import { useTranslations } from '@/utils/i18n';
 import { getEntry } from 'astro:content';
+import Icon from '@/components/ui/Icon.astro';
 
 export interface Props {
   lang: Language;
@@ -107,7 +108,7 @@ const content = aboutData?.data;
 
         {content?.experience && (
           <div class="space-y-8" role="region" aria-labelledby="experience-heading">
-            {content.experience.map((job, index) => (
+            {content.experience.map((job) => (
               <article>
                 <div class="bg-bg-tertiary rounded-lg p-6 shadow-card">
                   <h4 class="text-lg font-semibold text-text-primary mb-1">
@@ -124,9 +125,7 @@ const content = aboutData?.data;
                     <ul class="space-y-2" role="list" aria-label="Key achievements">
                       {job.highlights.map((highlight) => (
                         <li class="text-text-muted text-sm flex items-start">
-                          <svg class="w-4 h-4 text-accent-primary mr-2 mt-0.5 flex-shrink-0" fill="currentColor" viewBox="0 0 20 20" aria-hidden="true">
-                            <path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd" />
-                          </svg>
+                          <Icon name="check-circle" size="sm" class="text-accent-primary mr-2 mt-0.5 flex-shrink-0" />
                           <span>{highlight}</span>
                         </li>
                       ))}
@@ -145,9 +144,7 @@ const content = aboutData?.data;
       <section class="mt-16" aria-labelledby="philosophy-heading">
         <div class="border border-gray-700 rounded-lg p-8 text-center">
             <div class="inline-flex items-center justify-center mb-6">
-              <svg class="w-12 h-12 text-accent-primary" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true">
-                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9.663 17h4.673M12 3v1m6.364 1.636l-.707.707M21 12h-1M4 12H3m3.343-5.657l-.707-.707m2.828 9.9a5 5 0 117.072 0l-.548.547A3.374 3.374 0 0014 18.469V19a2 2 0 11-4 0v-.531c0-.895-.356-1.754-.988-2.386l-.548-.547z" />
-              </svg>
+              <Icon name="lightbulb" size="xl" class="text-accent-primary" />
             </div>
 
             <h3 class="text-3xl font-bold text-text-primary mb-4" id="philosophy-heading">

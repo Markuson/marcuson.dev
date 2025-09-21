@@ -1,6 +1,7 @@
 ---
 import type { Language } from '@/utils/i18n';
 import { useTranslations } from '@/utils/i18n';
+import Icon from '@/components/ui/Icon.astro';
 
 export interface Props {
   lang: Language;
@@ -69,9 +70,7 @@ const isActive = (href: string) => currentPath === href;
             type="button"
           >
             {lang.toUpperCase()}
-            <svg class="w-4 h-4 ml-1" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true">
-              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7" />
-            </svg>
+            <Icon name="chevron-down" size="sm" class="ml-1" />
           </button>
           <div
             class="absolute top-full mt-1 right-0 bg-bg-secondary border border-border-primary rounded shadow-lg py-1 min-w-16 z-50"
@@ -99,20 +98,7 @@ const isActive = (href: string) => currentPath === href;
           class="inline-flex items-center px-4 py-2 bg-accent-primary text-black font-medium rounded-lg hover:bg-accent-secondary hover:scale-105 transition-all duration-200 focus:outline-none focus:ring-2 focus:ring-accent-primary focus:ring-offset-2 focus:ring-offset-bg-primary"
           aria-label={t('nav.downloadCV')}
         >
-          <svg
-            class="w-4 h-4 mr-2"
-            fill="none"
-            stroke="currentColor"
-            viewBox="0 0 24 24"
-            aria-hidden="true"
-          >
-            <path
-              stroke-linecap="round"
-              stroke-linejoin="round"
-              stroke-width="2"
-              d="M12 10v6m0 0l-3-3m3 3l3-3m2 8H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"
-            />
-          </svg>
+          <Icon name="download" size="sm" class="mr-2" />
           {t('nav.downloadCV')}
         </a>
       </div>
@@ -124,20 +110,7 @@ const isActive = (href: string) => currentPath === href;
         id="mobile-menu-button"
         type="button"
       >
-        <svg
-          class="w-6 h-6"
-          fill="none"
-          stroke="currentColor"
-          viewBox="0 0 24 24"
-          aria-hidden="true"
-        >
-          <path
-            stroke-linecap="round"
-            stroke-linejoin="round"
-            stroke-width="2"
-            d="M4 6h16M4 12h16M4 18h16"
-          />
-        </svg>
+        <Icon name="menu" />
       </button>
     </div>
   </div>
@@ -194,20 +167,7 @@ const isActive = (href: string) => currentPath === href;
           class="inline-flex items-center justify-center w-full px-4 py-3 bg-accent-primary text-bg-primary font-medium rounded-lg hover:bg-accent-secondary transition-colors duration-200 focus:outline-none focus:ring-2 focus:ring-accent-primary focus:ring-offset-2 focus:ring-offset-bg-secondary"
           aria-label={t('nav.downloadCV')}
         >
-          <svg
-            class="w-4 h-4 mr-2"
-            fill="none"
-            stroke="currentColor"
-            viewBox="0 0 24 24"
-            aria-hidden="true"
-          >
-            <path
-              stroke-linecap="round"
-              stroke-linejoin="round"
-              stroke-width="2"
-              d="M12 10v6m0 0l-3-3m3 3l3-3m2 8H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"
-            />
-          </svg>
+          <Icon name="download" size="sm" class="mr-2" />
           {t('nav.downloadCV')}
         </a>
       </div>
@@ -283,7 +243,6 @@ const isActive = (href: string) => currentPath === href;
 
   // Navigation scroll behavior
   const nav = document.getElementById('main-nav');
-  let lastScrollY = window.scrollY;
 
   function updateNavigation() {
     const currentScrollY = window.scrollY;
@@ -307,8 +266,6 @@ const isActive = (href: string) => currentPath === href;
         'shadow-lg'
       );
     }
-
-    lastScrollY = currentScrollY;
   }
 
   // Initialize and listen for scroll
