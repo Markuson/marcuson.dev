@@ -44,6 +44,10 @@
 - [x] Hero background SVG (isometric tech illustration)
 - [ ] Professional headshot/profile image
 - [x] Project screenshots/mockups for portfolio
+- [ ] **Open Graph (OG) Image** (`/assets/og-image.jpg`, 1200x630px)
+  - Social media preview image for LinkedIn, Twitter, Facebook, etc.
+  - Should include professional photo/branding with name and title
+  - Makes link shares more engaging and professional
 - [ ] Google Analytics 4 Measurement ID
 
 ## Content Requirements

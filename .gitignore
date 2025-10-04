@@ -27,3 +27,6 @@ pnpm-debug.log*
 .lighthouse/
 # LHCI cache and results
 .lighthouseci/
+
+# vercel
+.vercel

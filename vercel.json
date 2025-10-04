@@ -126,10 +126,5 @@
       "source": "/sitemap.xml",
       "destination": "/sitemap-index.xml"
     }
-  ],
-  "functions": {
-    "app/**": {
-      "runtime": "edge"
-    }
-  }
+  ]
 }
