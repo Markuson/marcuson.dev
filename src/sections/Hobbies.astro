@@ -1,0 +1,107 @@
+---
+import Container from '@/components/layout/Container.astro';
+import SectionHeader from '@/components/data-display/SectionHeader.astro';
+import Chip from '@/components/data-display/Chip.astro';
+import type { Language } from '@/utils/i18n';
+import { useTranslations } from '@/utils/i18n';
+import { getCollection } from 'astro:content';
+import Icon from '@/components/ui/Icon.astro';
+import type { IconName } from '@/utils/icons';
+
+export interface Props {
+  lang: Language;
+}
+
+const { lang } = Astro.props;
+const t = useTranslations(lang);
+
+const hobbyEntries = await getCollection('hobbies', ({ data }) => data.lang === lang);
+const fallbackHobbies =
+  hobbyEntries.length > 0 ? [] : await getCollection('hobbies', ({ data }) => data.lang === 'en');
+
+const hobbies = (hobbyEntries.length > 0 ? hobbyEntries : fallbackHobbies)
+  .sort((a, b) => a.data.order - b.data.order);
+
+const iconMap: Record<string, IconName> = {
+  printing: 'printer-3d',
+  electronics: 'lightning-bolt',
+  robotics: 'cpu-chip',
+  ai: 'lightbulb',
+};
+---
+
+<section id="hobbies-section" class="py-20 lg:py-32 bg-bg-primary">
+  <Container>
+    <SectionHeader
+      title={t('hobbies.title')}
+      subtitle={t('hobbies.subtitle')}
+      centered={true}
+      class="mb-16"
+    />
+
+    <!-- Hobbies Grid -->
+    <div class="grid md:grid-cols-2 gap-8 mb-16" role="region" aria-label="Hobbies and making projects">
+      {hobbies.map(({ data: hobby }) => (
+        <article class="bg-bg-secondary rounded-lg p-6 shadow-card border border-border-primary">
+          <!-- Icon and Title -->
+          <div class="flex items-center mb-6">
+            <div class="inline-flex items-center justify-center w-12 h-12 text-accent-primary mr-4">
+              <Icon name={iconMap[hobby.icon ?? 'printing'] ?? iconMap.printing} size="xl" />
+            </div>
+            <h3 class="text-xl font-semibold text-text-primary">
+              {hobby.title}
+            </h3>
+          </div>
+
+          <!-- Description -->
+          <p class="text-text-secondary leading-relaxed mb-6">
+            {hobby.description}
+          </p>
+
+          <!-- Recent Projects & Highlights -->
+          <div class="mb-6">
+            <h4 class="text-sm font-medium text-accent-primary mb-3 uppercase tracking-wide" id={`highlights-${hobby.title.toLowerCase().replace(/\s+/g, '-')}`}>
+              Recent Projects & Highlights
+            </h4>
+            <ul class="space-y-2" role="list" aria-labelledby={`highlights-${hobby.title.toLowerCase().replace(/\s+/g, '-')}`}>
+              {hobby.highlights.map((highlight) => (
+                <li class="text-text-muted text-sm flex items-start">
+                  <Icon name="check-circle" size="sm" class="text-accent-primary mr-2 mt-0.5 flex-shrink-0" />
+                  <span>{highlight}</span>
+                </li>
+              ))}
+            </ul>
+          </div>
+
+          <!-- Tools & Technologies -->
+          <div>
+            <h4 class="text-sm font-medium text-accent-primary mb-3 uppercase tracking-wide" id={`tools-${hobby.title.toLowerCase().replace(/\s+/g, '-')}`}>
+              Tools & Technologies
+            </h4>
+            <div class="flex flex-wrap gap-2" role="list" aria-labelledby={`tools-${hobby.title.toLowerCase().replace(/\s+/g, '-')}`}>
+              {hobby.tools.map((tool) => (
+                <Chip text={tool} class="text-xs" />
+              ))}
+            </div>
+          </div>
+        </article>
+      ))}
+    </div>
+
+    <!-- Collaboration Banner -->
+    <section class="border border-gray-700 rounded-lg p-8 text-center" aria-labelledby="collaboration-heading">
+        <div class="inline-flex items-center justify-center mb-6">
+          <Icon name="users" size="xl" class="text-accent-primary" />
+        </div>
+
+        <h3 class="text-3xl font-bold text-text-primary mb-4" id="collaboration-heading">
+          Let's Build Something Together
+        </h3>
+
+        <p class="text-lg text-text-secondary leading-relaxed max-w-3xl mx-auto">
+          Interested in collaborating on a project that combines technology with hands-on making?
+          I'm always excited to work on innovative solutions that bridge the digital and physical worlds.
+        </p>
+    </section>
+  </Container>
+</section>

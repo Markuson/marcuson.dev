@@ -1,0 +1,135 @@
+---
+import Container from '@/components/layout/Container.astro';
+import SectionHeader from '@/components/data-display/SectionHeader.astro';
+import type { Language } from '@/utils/i18n';
+import { getEntry } from 'astro:content';
+import Icon from '@/components/ui/Icon.astro';
+import type { IconName } from '@/utils/icons';
+
+export interface Props {
+  lang: Language;
+}
+
+const { lang } = Astro.props;
+
+const contactEntry = await getEntry('contact', lang);
+const fallbackEntry = lang === 'en' ? contactEntry : await getEntry('contact', 'en');
+const contact = contactEntry?.data ?? fallbackEntry?.data;
+
+const iconMap: Record<string, IconName> = {
+  email: 'email',
+  github: 'github',
+  linkedin: 'linkedin',
+  project: 'lightning-bolt',
+  cv: 'download',
+  location: 'location-marker',
+};
+
+const primaryActionClasses = {
+  primary:
+    'inline-flex items-center justify-center w-full px-4 py-3 bg-accent-primary text-bg-primary font-medium rounded hover:bg-accent-secondary transition-colors duration-200 focus:outline-none focus:ring-2 focus:ring-accent-primary focus:ring-offset-2 focus:ring-offset-bg-secondary min-h-[44px]',
+  outline:
+    'inline-flex items-center justify-center w-full px-4 py-3 border border-accent-primary text-accent-primary font-medium rounded hover:bg-accent-primary hover:text-bg-primary transition-colors duration-200 focus:outline-none focus:ring-2 focus:ring-accent-primary focus:ring-offset-2 focus:ring-offset-bg-secondary min-h-[44px]',
+};
+
+const secondaryActionClasses = {
+  primary:
+    'inline-flex items-center px-6 py-4 bg-accent-primary text-bg-primary font-medium rounded hover:bg-accent-secondary transition-colors duration-200 focus:outline-none focus:ring-2 focus:ring-accent-primary focus:ring-offset-2 focus:ring-offset-bg-secondary min-h-[48px]',
+  outline:
+    'inline-flex items-center px-6 py-4 border border-accent-primary text-accent-primary font-medium rounded hover:bg-accent-primary hover:text-bg-primary transition-colors duration-200 focus:outline-none focus:ring-2 focus:ring-accent-primary focus:ring-offset-2 focus:ring-offset-bg-secondary min-h-[48px]',
+};
+
+const statusColors = {
+  open: { dot: 'bg-green-500', text: 'text-green-500' },
+  busy: { dot: 'bg-yellow-500', text: 'text-yellow-500' },
+  unavailable: { dot: 'bg-red-500', text: 'text-red-500' },
+};
+
+const primaryCards = contact?.primaryCards ?? [];
+const secondaryCards = contact?.secondaryCards ?? [];
+const status = contact?.status;
+
+const shouldOpenNewTab = (href: string) => href.startsWith('http');
+---
+
+<section id="contact-section" class="py-20 lg:py-32 bg-bg-contrast">
+  <Container>
+    <SectionHeader
+      title={contact?.title ?? 'Let\'s Work Together'}
+      subtitle={contact?.subtitle}
+      centered={true}
+      class="mb-16"
+    />
+
+    {primaryCards.length > 0 && (
+      <div class="grid md:grid-cols-3 gap-6 mb-8 mx-[10%]" role="region" aria-label="Contact methods">
+        {primaryCards.map((card) => (
+          <article class="bg-bg-secondary rounded-lg p-6 text-center transition-all duration-200 shadow-card hover:shadow-lg hover:-translate-y-1 border border-border-primary">
+            <div class="inline-flex items-center justify-center w-12 h-12 bg-bg-tertiary rounded-full text-accent-primary mb-4">
+              <Icon name={iconMap[card.id] ?? iconMap.email} />
+            </div>
+            <h3 class="text-lg font-semibold text-text-primary mb-2">{card.title}</h3>
+            <p class="text-text-secondary text-sm mb-4">{card.value}</p>
+            <a
+              href={card.action.href}
+              target={shouldOpenNewTab(card.action.href) ? '_blank' : undefined}
+              rel={shouldOpenNewTab(card.action.href) ? 'noopener noreferrer' : undefined}
+              class={primaryActionClasses[card.action.variant]}
+            >
+              {card.action.label}
+            </a>
+          </article>
+        ))}
+      </div>
+    )}
+
+    {secondaryCards.length > 0 && (
+      <div class="grid md:grid-cols-2 gap-6 mb-12 mx-[10%]" role="region" aria-label="Collaboration opportunities">
+        {secondaryCards.map((card) => (
+          <article class="bg-bg-secondary rounded-lg p-8 transition-all duration-200 shadow-card hover:shadow-lg hover:-translate-y-1 border border-border-primary">
+            <div class="flex items-start">
+              <div class="inline-flex items-center justify-center w-12 h-12 bg-bg-tertiary rounded-full text-accent-primary mr-4 flex-shrink-0">
+                <Icon name={iconMap[card.id] ?? iconMap.project} />
+              </div>
+              <div class="flex-1">
+                <h3 class="text-xl font-semibold text-text-primary mb-3">{card.title}</h3>
+                <p class="text-text-secondary leading-relaxed mb-4">
+                  {card.description}
+                </p>
+                <a
+                  href={card.action.href}
+                  target={shouldOpenNewTab(card.action.href) ? '_blank' : undefined}
+                  rel={shouldOpenNewTab(card.action.href) ? 'noopener noreferrer' : undefined}
+                  class={secondaryActionClasses[card.action.variant]}
+                >
+                  {card.action.label}
+                </a>
+              </div>
+            </div>
+          </article>
+        ))}
+      </div>
+    )}
+
+    {status && (
+      <section class="border border-border-primary rounded-lg p-8 text-center mx-[10%]" aria-labelledby="status-heading">
+          <div class="inline-flex items-center justify-center mb-6">
+            <Icon name={iconMap.location} size="xl" class="text-accent-primary" />
+          </div>
+
+          <h3 class="text-3xl font-bold text-text-primary mb-4" id="status-heading">
+            {status.heading}
+          </h3>
+
+          <p class="text-lg text-text-secondary leading-relaxed max-w-3xl mx-auto mb-2">
+            {status.description}
+          </p>
+
+          <div class={`inline-flex items-center ${statusColors[status.availabilityState]?.text ?? 'text-green-500'}`} role="status" aria-live="polite">
+            <div class={`w-3 h-3 rounded-full mr-2 animate-pulse ${statusColors[status.availabilityState]?.dot ?? 'bg-green-500'}`} aria-hidden="true"></div>
+            <span class="font-medium">{status.availabilityLabel}</span>
+          </div>
+      </section>
+    )}
+  </Container>
+</section>

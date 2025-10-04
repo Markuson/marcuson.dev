@@ -22,3 +22,8 @@ pnpm-debug.log*
 
 # jetbrains setting folder
 .idea/
+
+# lighthouse reports
+.lighthouse/
+# LHCI cache and results
+.lighthouseci/

@@ -1,1 +1,62 @@
-@import "tailwindcss";
+@import 'tailwindcss';
+
+@theme {
+  /* B — Dark (per defecte) */
+  --color-accent-primary:   #28E07A;
+  --color-accent-secondary: #1CC367;
+  --color-accent-tertiary:  #4CE590;
+
+  --color-bg-primary:       #0A0D11;
+  --color-bg-secondary:     #10151B;
+  --color-bg-tertiary:      #172028;
+  --color-bg-contrast:      #0C1116;
+
+  --color-text-primary:     #E3EAF2;
+  --color-text-secondary:   #BDCADD;
+  --color-text-muted:       #90A0B3;
+
+  --color-border-primary:   #2A3440;
+  --color-border-secondary: #1F2A35;
+
+  --color-glass-bg:         #10151B99;
+  --color-glass-border:     #2A344066;
+}
+
+
+
+/* Focus ring reset for better custom focus styles */
+*:focus {
+  outline: none;
+}
+
+*:focus-visible {
+  outline: 2px solid var(--color-accent-primary);
+  outline-offset: 2px;
+}
+
+/* Dark theme by default */
+:root {
+  color-scheme: dark;
+}
+
+html {
+  background-color: #0B0F14;
+  color: #E5E7EB;
+}
+
+/* Smooth scrolling */
+html {
+  scroll-behavior: smooth;
+}
+
+/* Reduce motion for users who prefer it */
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+}

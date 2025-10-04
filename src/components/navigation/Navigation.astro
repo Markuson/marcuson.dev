@@ -1,0 +1,274 @@
+---
+import type { Language } from '@/utils/i18n';
+import { useTranslations } from '@/utils/i18n';
+import Icon from '@/components/ui/Icon.astro';
+
+export interface Props {
+  lang: Language;
+  currentPath?: string;
+}
+
+const { lang, currentPath = '' } = Astro.props;
+const t = useTranslations(lang);
+
+const navLinks = [
+  { href: '#about-section', label: t('nav.about') },
+  { href: '#projects-section', label: t('nav.projects') },
+  { href: '#hobbies-section', label: t('nav.hobbies') },
+  { href: '#contact-section', label: t('nav.contact') },
+];
+
+const isActive = (href: string) => currentPath === href;
+---
+
+<nav
+  class="fixed top-0 left-0 right-0 z-50 transition-all duration-200 ease-out"
+  role="navigation"
+  aria-label="Main navigation"
+  id="main-nav"
+>
+  <div class="max-w-8xl mx-auto px-8 sm:px-12 lg:px-50">
+    <div class="flex items-center justify-between h-12 lg:h-14">
+      <!-- Logo -->
+      <a
+        href={`/${lang}`}
+        class="text-xl font-bold text-accent-primary hover:text-accent-secondary transition-colors duration-200 focus:outline-none focus:ring-2 focus:ring-accent-primary focus:ring-offset-2 focus:ring-offset-bg-primary"
+        aria-label="Marc Uson - Home"
+      >
+        marcuson.dev
+      </a>
+
+      <!-- Desktop Navigation -->
+      <div class="hidden md:flex items-center space-x-8">
+        <!-- Nav Links -->
+        <div class="flex items-center space-x-6">
+          {
+            navLinks.map(({ href, label }) => (
+              <a
+                href={href}
+                class={`text-text-secondary hover:text-text-primary transition-colors duration-200 font-medium relative focus:outline-none focus:ring-2 focus:ring-accent-primary focus:ring-offset-2 focus:ring-offset-bg-primary ${
+                  isActive(href) ? 'text-accent-primary' : ''
+                }`}
+                aria-current={isActive(href) ? 'page' : undefined}
+                onclick={`event.preventDefault(); document.querySelector('${href}')?.scrollIntoView({ behavior: 'smooth' })`}
+              >
+                {label}
+                {isActive(href) && (
+                  <span class="absolute -bottom-1 left-0 right-0 h-0.5 bg-accent-primary rounded-full" />
+                )}
+              </a>
+            ))
+          }
+        </div>
+
+        <!-- Language Selector -->
+        <div class="relative" id="language-selector">
+          <button
+            class="px-3 py-1 text-sm font-medium border border-accent-primary text-accent-primary rounded transition-colors duration-200 focus:outline-none focus:ring-2 focus:ring-accent-primary focus:ring-offset-2 focus:ring-offset-bg-primary flex items-center hover:bg-accent-primary hover:text-bg-primary"
+            aria-label="Select language"
+            id="language-button"
+            type="button"
+          >
+            {lang.toUpperCase()}
+            <Icon name="chevron-down" size="sm" class="ml-1" />
+          </button>
+          <div
+            class="absolute top-full mt-1 right-0 bg-bg-secondary border border-border-primary rounded shadow-lg py-1 min-w-16 z-50"
+            id="language-dropdown"
+            style="display: none;"
+          >
+            {
+              ['ca', 'es', 'en'].filter(locale => locale !== lang).map((locale) => (
+                <a
+                  href={`/${locale}${currentPath.replace(/^\/(en|es|ca)/, '')}`}
+                  class="block px-3 py-2 text-sm font-medium text-text-secondary hover:text-text-primary hover:bg-bg-tertiary transition-colors duration-200"
+                  aria-label={`Switch to ${locale.toUpperCase()}`}
+                >
+                  {locale.toUpperCase()}
+                </a>
+              ))
+            }
+          </div>
+        </div>
+
+        <!-- Download CV Button -->
+        <a
+          href="/assets/cv/marcuson.pdf"
+          download
+          class="inline-flex items-center px-4 py-2 bg-accent-primary text-black font-medium rounded-lg hover:bg-accent-secondary hover:scale-105 transition-all duration-200 focus:outline-none focus:ring-2 focus:ring-accent-primary focus:ring-offset-2 focus:ring-offset-bg-primary"
+          aria-label={t('nav.downloadCV')}
+        >
+          <Icon name="download" size="sm" class="mr-2" />
+          {t('nav.downloadCV')}
+        </a>
+      </div>
+
+      <!-- Mobile Menu Button -->
+      <button
+        class="md:hidden p-2 text-text-secondary hover:text-text-primary transition-colors duration-200 focus:outline-none focus:ring-2 focus:ring-accent-primary focus:ring-offset-2 focus:ring-offset-bg-primary"
+        aria-label="Toggle mobile menu"
+        id="mobile-menu-button"
+        type="button"
+      >
+        <Icon name="menu" />
+      </button>
+    </div>
+  </div>
+
+  <!-- Mobile Menu -->
+  <div
+    class="md:hidden border-t border-border-primary bg-bg-secondary"
+    id="mobile-menu"
+    style="display: none;"
+  >
+    <div class="px-6 py-4 space-y-4">
+      <!-- Mobile Nav Links -->
+      {
+        navLinks.map(({ href, label }) => (
+          <a
+            href={href}
+            class={`block text-text-secondary hover:text-text-primary transition-colors duration-200 font-medium py-2 focus:outline-none focus:ring-2 focus:ring-accent-primary focus:ring-offset-2 focus:ring-offset-bg-secondary ${
+              isActive(href) ? 'text-accent-primary' : ''
+            }`}
+            aria-current={isActive(href) ? 'page' : undefined}
+            onclick={`event.preventDefault(); document.querySelector('${href}')?.scrollIntoView({ behavior: 'smooth' }); document.getElementById('mobile-menu').style.display = 'none'`}
+          >
+            {label}
+          </a>
+        ))
+      }
+
+      <!-- Mobile Language Selector -->
+      <div class="pt-4 border-t border-border-primary">
+        <div class="flex space-x-2">
+          {
+            ['ca', 'es', 'en'].map((locale) => (
+              <a
+                href={`/${locale}${currentPath.replace(/^\/(en|es|ca)/, '')}`}
+                class={`px-3 py-2 text-sm font-medium rounded transition-colors duration-200 focus:outline-none focus:ring-2 focus:ring-accent-primary focus:ring-offset-2 focus:ring-offset-bg-secondary ${
+                  lang === locale
+                    ? 'bg-accent-primary text-bg-primary'
+                    : 'text-text-secondary hover:text-text-primary hover:bg-bg-tertiary'
+                }`}
+                aria-label={`Switch to ${locale.toUpperCase()}`}
+              >
+                {locale.toUpperCase()}
+              </a>
+            ))
+          }
+        </div>
+      </div>
+
+      <!-- Mobile Download CV Button -->
+      <div class="pt-4">
+        <a
+          href="/assets/cv/marcuson.pdf"
+          download
+          class="inline-flex items-center justify-center w-full px-4 py-3 bg-accent-primary text-bg-primary font-medium rounded-lg hover:bg-accent-secondary transition-colors duration-200 focus:outline-none focus:ring-2 focus:ring-accent-primary focus:ring-offset-2 focus:ring-offset-bg-secondary"
+          aria-label={t('nav.downloadCV')}
+        >
+          <Icon name="download" size="sm" class="mr-2" />
+          {t('nav.downloadCV')}
+        </a>
+      </div>
+    </div>
+  </div>
+</nav>
+
+<script>
+  // Mobile menu toggle
+  const mobileMenuButton = document.getElementById('mobile-menu-button');
+  const mobileMenu = document.getElementById('mobile-menu');
+
+  if (mobileMenuButton && mobileMenu) {
+    const toggleMobileMenu = () => {
+      const isOpen = mobileMenu.style.display !== 'none';
+      mobileMenu.style.display = isOpen ? 'none' : 'block';
+      mobileMenuButton.setAttribute('aria-expanded', (!isOpen).toString());
+    };
+
+    mobileMenuButton.addEventListener('click', toggleMobileMenu);
+
+    // Keyboard support for mobile menu
+    mobileMenuButton.addEventListener('keydown', (event) => {
+      if (event.key === 'Enter' || event.key === ' ') {
+        event.preventDefault();
+        toggleMobileMenu();
+      }
+    });
+  }
+
+  // Language selector dropdown
+  const languageButton = document.getElementById('language-button');
+  const languageDropdown = document.getElementById('language-dropdown');
+
+  if (languageButton && languageDropdown) {
+    const toggleLanguageDropdown = () => {
+      const isOpen = languageDropdown.style.display !== 'none';
+      languageDropdown.style.display = isOpen ? 'none' : 'block';
+      languageButton.setAttribute('aria-expanded', (!isOpen).toString());
+    };
+
+    const closeLanguageDropdown = () => {
+      languageDropdown.style.display = 'none';
+      languageButton.setAttribute('aria-expanded', 'false');
+    };
+
+    languageButton.addEventListener('click', toggleLanguageDropdown);
+
+    // Keyboard support for language dropdown
+    languageButton.addEventListener('keydown', (event) => {
+      if (event.key === 'Enter' || event.key === ' ') {
+        event.preventDefault();
+        toggleLanguageDropdown();
+      } else if (event.key === 'Escape') {
+        closeLanguageDropdown();
+      }
+    });
+
+    // Close dropdown when clicking outside
+    document.addEventListener('click', (event) => {
+      if (!languageButton.contains(event.target as Node) && !languageDropdown.contains(event.target as Node)) {
+        closeLanguageDropdown();
+      }
+    });
+
+    // Close dropdown on escape key globally
+    document.addEventListener('keydown', (event) => {
+      if (event.key === 'Escape') {
+        closeLanguageDropdown();
+      }
+    });
+  }
+
+  // Navigation scroll behavior
+  const nav = document.getElementById('main-nav');
+
+  function updateNavigation() {
+    const currentScrollY = window.scrollY;
+
+    if (currentScrollY > 16) {
+      // Add glass background when scrolled
+      nav?.classList.add(
+        'bg-gray-800/30',
+        'backdrop-blur-sm',
+        'border-b',
+        'border-white/10',
+        'shadow-lg'
+      );
+    } else {
+      // Remove glass background at top
+      nav?.classList.remove(
+        'bg-gray-800/30',
+        'backdrop-blur-sm',
+        'border-b',
+        'border-white/10',
+        'shadow-lg'
+      );
+    }
+  }
+
+  // Initialize and listen for scroll
+  updateNavigation();
+  window.addEventListener('scroll', updateNavigation, { passive: true });
+</script>

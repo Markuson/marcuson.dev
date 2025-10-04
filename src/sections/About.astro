@@ -1,0 +1,161 @@
+---
+import Container from '@/components/layout/Container.astro';
+import SectionHeader from '@/components/data-display/SectionHeader.astro';
+import Chip from '@/components/data-display/Chip.astro';
+import type { Language } from '@/utils/i18n';
+import { useTranslations } from '@/utils/i18n';
+import { getEntry } from 'astro:content';
+import Icon from '@/components/ui/Icon.astro';
+
+export interface Props {
+  lang: Language;
+}
+
+const { lang } = Astro.props;
+const t = useTranslations(lang);
+
+// Get about content from collections
+const aboutData = await getEntry('about', lang);
+const content = aboutData?.data;
+---
+
+<section id="about-section" class="py-20 lg:py-32 bg-bg-primary">
+  <Container>
+    <SectionHeader
+      title={content?.title || t('about.title')}
+      subtitle={content?.subtitle || t('about.subtitle')}
+      centered={true}
+      class="mb-16"
+    />
+
+    <div class="grid lg:grid-cols-2 gap-12 lg:gap-16">
+      <!-- Skills & Technologies -->
+      <div>
+        <h3 class="text-card-title font-semibold text-text-primary mb-8" id="skills-heading">
+          Skills & Technologies
+        </h3>
+
+        {content?.skills && (
+          <div class="space-y-6" role="region" aria-labelledby="skills-heading">
+            <!-- Frontend -->
+            <div class="bg-bg-tertiary rounded-lg p-6 shadow-card">
+              <h4 class="text-sm font-medium text-accent-primary mb-4 uppercase tracking-wide" id="frontend-heading">
+                Frontend
+              </h4>
+              <div class="flex flex-wrap gap-2" role="list" aria-labelledby="frontend-heading">
+                {content.skills.frontend.map((skill) => (
+                  <Chip text={skill} />
+                ))}
+              </div>
+            </div>
+
+            <!-- Mobile -->
+            <div class="bg-bg-tertiary rounded-lg p-6 shadow-card">
+              <h4 class="text-sm font-medium text-accent-primary mb-4 uppercase tracking-wide" id="mobile-heading">
+                Mobile
+              </h4>
+              <div class="flex flex-wrap gap-2" role="list" aria-labelledby="mobile-heading">
+                {content.skills.mobile.map((skill) => (
+                  <Chip text={skill} />
+                ))}
+              </div>
+            </div>
+
+            <!-- Backend -->
+            <div class="bg-bg-tertiary rounded-lg p-6 shadow-card">
+              <h4 class="text-sm font-medium text-accent-primary mb-4 uppercase tracking-wide" id="backend-heading">
+                Backend
+              </h4>
+              <div class="flex flex-wrap gap-2" role="list" aria-labelledby="backend-heading">
+                {content.skills.backend.map((skill) => (
+                  <Chip text={skill} />
+                ))}
+              </div>
+            </div>
+
+            <!-- AI/ML -->
+            <div class="bg-bg-tertiary rounded-lg p-6 shadow-card">
+              <h4 class="text-sm font-medium text-accent-primary mb-4 uppercase tracking-wide" id="aiml-heading">
+                AI/ML
+              </h4>
+              <div class="flex flex-wrap gap-2" role="list" aria-labelledby="aiml-heading">
+                {content.skills.aiml.map((skill) => (
+                  <Chip text={skill} />
+                ))}
+              </div>
+            </div>
+
+            <!-- Making -->
+            <div class="bg-bg-tertiary rounded-lg p-6 shadow-card">
+              <h4 class="text-sm font-medium text-accent-primary mb-4 uppercase tracking-wide" id="making-heading">
+                Making
+              </h4>
+              <div class="flex flex-wrap gap-2" role="list" aria-labelledby="making-heading">
+                {content.skills.making.map((skill) => (
+                  <Chip text={skill} />
+                ))}
+              </div>
+            </div>
+          </div>
+        )}
+      </div>
+
+      <!-- Experience Timeline -->
+      <div>
+        <h3 class="text-card-title font-semibold text-text-primary mb-8" id="experience-heading">
+          Experience
+        </h3>
+
+        {content?.experience && (
+          <div class="space-y-8" role="region" aria-labelledby="experience-heading">
+            {content.experience.map((job) => (
+              <article>
+                <div class="bg-bg-tertiary rounded-lg p-6 shadow-card">
+                  <h4 class="text-lg font-semibold text-text-primary mb-1">
+                    {job.role}
+                  </h4>
+                  <div class="text-accent-primary font-medium mb-2">
+                    {job.company} · {job.period}
+                  </div>
+                  <p class="text-text-secondary mb-4 leading-relaxed">
+                    {job.description}
+                  </p>
+
+                  {job.highlights && job.highlights.length > 0 && (
+                    <ul class="space-y-2" role="list" aria-label="Key achievements">
+                      {job.highlights.map((highlight) => (
+                        <li class="text-text-muted text-sm flex items-start">
+                          <Icon name="check-circle" size="sm" class="text-accent-primary mr-2 mt-0.5 flex-shrink-0" />
+                          <span>{highlight}</span>
+                        </li>
+                      ))}
+                    </ul>
+                  )}
+                </div>
+              </article>
+            ))}
+          </div>
+        )}
+      </div>
+    </div>
+
+    <!-- Philosophy Section -->
+    {content?.philosophy && (
+      <section class="mt-16" aria-labelledby="philosophy-heading">
+        <div class="border border-gray-700 rounded-lg p-8 text-center">
+            <div class="inline-flex items-center justify-center mb-6">
+              <Icon name="lightbulb" size="xl" class="text-accent-primary" />
+            </div>
+
+            <h3 class="text-3xl font-bold text-text-primary mb-4" id="philosophy-heading">
+              {content.philosophy.title}
+            </h3>
+
+            <p class="text-lg text-text-secondary leading-relaxed max-w-3xl mx-auto">
+              {content.philosophy.content}
+            </p>
+        </div>
+      </section>
+    )}
+  </Container>
+</section>

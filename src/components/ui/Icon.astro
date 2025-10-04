@@ -1,0 +1,33 @@
+---
+import type { IconName, IconProps } from '@/utils/icons';
+import { getIconClasses, iconDefinitions } from '@/utils/icons';
+
+export interface Props extends IconProps {
+  name: IconName;
+}
+
+const { name, ...iconProps } = Astro.props;
+const iconClasses = getIconClasses(iconProps);
+const ariaHidden = iconProps['aria-hidden'] !== false;
+
+const icon = iconDefinitions[name];
+---
+
+{icon && (
+  <svg
+    class={iconClasses}
+    viewBox={icon.viewBox}
+    aria-hidden={ariaHidden}
+    fill={icon.fill || 'none'}
+    stroke={icon.stroke || 'none'}
+    stroke-linecap={icon.stroke ? 'round' : undefined}
+    stroke-linejoin={icon.stroke ? 'round' : undefined}
+    stroke-width={icon.stroke ? '2' : undefined}
+    fill-rule={icon.fill ? 'evenodd' : undefined}
+    clip-rule={icon.fill ? 'evenodd' : undefined}
+  >
+    {icon.paths.map((path) => (
+      <path d={path} />
+    ))}
+  </svg>
+)}

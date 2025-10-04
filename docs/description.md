@@ -1,6 +1,6 @@
 I want to build my personal website called maruson.dev. the main goal is to use it as a portfolio with focus on the profesional side but also mentioning some of my passions and hobbies that can be related to my work. I'm an ex industrial engineer especialized in industrial automation that has turned into a web and app and web developer, i've been working on react native apps oriented to IOT and control of products via cloud/bluetooth. And i've also done some projects using next.js. Actually, I'm also exploring AI related to development and increase of productivity.
 I'm also pasionate about the maker world, electronics and 3d printing. And I'm also very interested on AI as a developer and as a team lead.
- Here it is a detailed description of the website structure: 
+Here it is a detailed description of the website structure:
 
 # Hero
 
@@ -43,11 +43,11 @@ I'm also pasionate about the maker world, electronics and 3d printing. And I'm a
   - Subtitle: “A passionate developer who bridges the digital and physical worlds through code, AI, and hands-on making.”
   - Two-column grid:
     - **Left — Skills & Technologies:** grouped chips
-      - *Frontend:* React, TypeScript, Tailwind CSS, Next.js.
-      - *Mobile:* React Native, IoT Integration, Bluetooth/WiFi, Native Modules.
-      - *Backend:* Node.js, Python, PostgreSQL, APIs.
-      - *AI/ML:* OpenAI, LangChain, TensorFlow, Hugging Face.
-      - *Making:* 3D Printing, Arduino, Electronics, Robotics.
+      - _Frontend:_ React, TypeScript, Tailwind CSS, Next.js.
+      - _Mobile:_ React Native, IoT Integration, Bluetooth/WiFi, Native Modules.
+      - _Backend:_ Node.js, Python, PostgreSQL, APIs.
+      - _AI/ML:_ OpenAI, LangChain, TensorFlow, Hugging Face.
+      - _Making:_ 3D Printing, Arduino, Electronics, Robotics.
     - **Right — Experience:** chronological cards
       - **Senior Full-Stack Developer — Tech Innovations Inc. — 2022–Present.**
         - Leading AI-powered web apps and vibecoding methodologies.
@@ -80,12 +80,12 @@ I'm also pasionate about the maker world, electronics and 3d printing. And I'm a
     - Tech chips.
     - Footer actions: **Code** and **Demo** buttons.
   - Visible projects:
-    - **AI Code Assistant** — category *AI Development*, status *Featured*. Tech: TypeScript, OpenAI API, VS Code Extensions, React.
-    - **IoT Dashboard** — category *Full-Stack*, status *Live*. Tech: React, Node.js, WebSocket, Arduino, MQTT.
-    - **3D Print Optimizer** — category *AI/ML*, status *Open Source*. Tech: Python, TensorFlow, OpenCV, Flask.
-    - **Smart Home Hub** — category *Hardware*, status *Prototype*. Tech: React Native, Raspberry Pi, KiCad, Python.
-    - **VibeCoding Toolkit** — category *Research*, status *In Development*. Tech: Electron, Machine Learning, Node.js, Real-time Analytics.
-    - **E-commerce Platform** — category *Web Development*, status *Client Project*. Tech: Next.js, Stripe, PostgreSQL, Tailwind CSS.
+    - **AI Code Assistant** — category _AI Development_, status _Featured_. Tech: TypeScript, OpenAI API, VS Code Extensions, React.
+    - **IoT Dashboard** — category _Full-Stack_, status _Live_. Tech: React, Node.js, WebSocket, Arduino, MQTT.
+    - **3D Print Optimizer** — category _AI/ML_, status _Open Source_. Tech: Python, TensorFlow, OpenCV, Flask.
+    - **Smart Home Hub** — category _Hardware_, status _Prototype_. Tech: React Native, Raspberry Pi, KiCad, Python.
+    - **VibeCoding Toolkit** — category _Research_, status _In Development_. Tech: Electron, Machine Learning, Node.js, Real-time Analytics.
+    - **E-commerce Platform** — category _Web Development_, status _Client Project_. Tech: Next.js, Stripe, PostgreSQL, Tailwind CSS.
   - Bottom CTA: “View All Projects on GitHub”.
 - **Interactions/States:**
   - Cards elevate and color border on hover.
@@ -153,4 +153,3 @@ I'm also pasionate about the maker world, electronics and 3d printing. And I'm a
 - Sans typography. Hierarchy: `h1` > `h2` > `h3` > `p` > chips.
 - Visible focus, contrast ≥4.5:1, full keyboard navigation.
 - i18n via language selector. External links use `rel="noopener"`.
-

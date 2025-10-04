@@ -7,23 +7,23 @@ import Hobbies from '@/sections/Hobbies.astro';
 import Contact from '@/sections/Contact.astro';
 import { getEntry } from 'astro:content';
 
-const lang = 'en';
+const lang = 'es';
 const homeEntry = await getEntry('home', lang);
 const fallbackEntry = lang === 'en' ? homeEntry : await getEntry('home', 'en');
 const meta = homeEntry?.data ?? fallbackEntry?.data ?? {
-  title: 'Marc Uson - Full-Stack Developer & AI Enthusiast',
+  title: 'Marc Uson - Desarrollador Full-Stack y Entusiasta de la IA',
   description:
-    'Ex-industrial automation engineer turned full-stack developer specializing in React, Node.js, IoT, and AI. Building innovative solutions that bridge digital and physical worlds.',
+    'Ex-ingeniero de automatización industrial convertido en desarrollador full-stack especializado en React, Node.js, IoT e IA. Construyendo soluciones innovadoras que conectan los mundos digital y físico.',
   keywords: [
-    'Full-Stack Developer',
-    'AI Engineer',
-    'IoT Developer',
-    'React Developer',
+    'Desarrollador Full-Stack',
+    'Ingeniero IA',
+    'Desarrollador IoT',
+    'Desarrollador React',
     'Node.js',
     'TypeScript',
-    'Machine Learning',
-    'Industrial Automation',
-    'Uppsala Sweden',
+    'Aprendizaje Automático',
+    'Automatización Industrial',
+    'Uppsala Suecia',
   ],
   type: 'profile',
 };

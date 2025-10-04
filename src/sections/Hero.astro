@@ -1,0 +1,119 @@
+---
+import Container from '@/components/layout/Container.astro';
+import type { Language } from '@/utils/i18n';
+import { useTranslations } from '@/utils/i18n';
+import Icon from '@/components/ui/Icon.astro';
+
+export interface Props {
+  lang: Language;
+}
+
+const { lang } = Astro.props;
+const t = useTranslations(lang);
+---
+
+<section class="relative h-screen flex items-center justify-center overflow-hidden bg-bg-contrast">
+  <!-- Hero Background SVG -->
+  <div class="absolute inset-0">
+    <img
+      src="/hero-background.svg"
+      alt=""
+      class="w-full h-full object-cover object-center"
+      aria-hidden="true"
+    />
+  </div>
+
+  <!-- Hero Content -->
+  <Container as="div" class="relative z-10 text-center px-8">
+    <div class="max-w-5xl mx-auto">
+      <!-- Main Title -->
+      <h1 class="text-4xl md:text-7xl lg:text-7xl font-bold text-accent-primary mb-6 leading-none px-1 mt-20">
+        {t('hero.title')}
+      </h1>
+
+      <!-- Subtitle 1 -->
+      <p class="text-xl lg:text-2xl text-text-secondary mb-6 leading-relaxed max-w-3xl mx-auto px-4">
+        {t('hero.subtitle1')}
+      </p>
+
+      <!-- Subtitle 2 -->
+      <p class="text-lg lg:text-xl text-text-muted mb-12 leading-relaxed max-w-2xl mx-auto px-4">
+        {t('hero.subtitle2')}
+      </p>
+
+      <!-- CTA Buttons -->
+      <div class="flex flex-col sm:flex-row gap-4 justify-center items-center mb-12">
+        <!-- Primary CTA - Download CV -->
+        <a
+          href="/assets/cv/marcuson.pdf"
+          download
+          class="inline-flex items-center px-8 py-4 bg-accent-primary text-black font-semibold rounded-lg hover:bg-accent-secondary hover:scale-105 transition-all duration-200 focus:outline-none focus:ring-2 focus:ring-accent-primary focus:ring-offset-2 focus:ring-offset-bg-primary w-full sm:w-auto justify-center shadow-lg"
+          aria-label={t('hero.downloadCV')}
+        >
+          <Icon name="download" size="sm" class="mr-3" />
+          {t('hero.downloadCV')}
+        </a>
+
+        <!-- Secondary CTA - View Projects -->
+        <a
+          href={`/${lang}/projects`}
+          class="inline-flex items-center px-8 py-4 border-2 border-accent-primary text-accent-primary font-semibold rounded-lg hover:bg-accent-primary hover:text-bg-primary transition-all duration-200 focus:outline-none focus:ring-2 focus:ring-accent-primary focus:ring-offset-2 focus:ring-offset-bg-primary w-full sm:w-auto justify-center"
+          aria-label={t('hero.viewProjects')}
+        >
+          <Icon name="printer-3d" size="sm" class="mr-3" />
+          {t('hero.viewProjects')}
+        </a>
+      </div>
+
+      <!-- Social Links -->
+      <div class="flex justify-center items-center space-x-6 mb-12">
+        <!-- GitHub -->
+        <a
+          href="https://github.com/Markuson"
+          target="_blank"
+          rel="noopener noreferrer"
+          class="p-3 text-text-secondary hover:text-accent-primary transition-colors duration-200 focus:outline-none focus:ring-2 focus:ring-accent-primary focus:ring-offset-2 focus:ring-offset-bg-primary rounded-lg"
+          aria-label="GitHub Profile"
+          title="GitHub"
+        >
+          <Icon name="github" size="lg" />
+        </a>
+
+        <!-- LinkedIn -->
+        <a
+          href="https://linkedin.com/in/marc-uson"
+          target="_blank"
+          rel="noopener noreferrer"
+          class="p-3 text-text-secondary hover:text-accent-primary transition-colors duration-200 focus:outline-none focus:ring-2 focus:ring-accent-primary focus:ring-offset-2 focus:ring-offset-bg-primary rounded-lg"
+          aria-label="LinkedIn Profile"
+          title="LinkedIn"
+        >
+          <Icon name="linkedin" size="lg" />
+        </a>
+
+        <!-- Email -->
+        <a
+          href="mailto:hi@marcuson.dev"
+          class="p-3 text-text-secondary hover:text-accent-primary transition-colors duration-200 focus:outline-none focus:ring-2 focus:ring-accent-primary focus:ring-offset-2 focus:ring-offset-bg-primary rounded-lg"
+          aria-label="Send Email"
+          title="Email"
+        >
+          <Icon name="email" size="lg" />
+        </a>
+      </div>
+
+    </div>
+  </Container>
+
+  <!-- Scroll Indicator -->
+  <div class="absolute bottom-8 left-1/2 transform -translate-x-1/2 animate-bounce">
+    <button
+      onclick="document.getElementById('about-section')?.scrollIntoView({ behavior: 'smooth' })"
+      class="p-2 text-text-muted hover:text-accent-primary transition-colors duration-200 focus:outline-none focus:ring-2 focus:ring-accent-primary focus:ring-offset-2 focus:ring-offset-bg-primary rounded-lg"
+      aria-label="Scroll to content"
+      title="Scroll down"
+    >
+      <Icon name="chevron-down-outline" />
+    </button>
+  </div>
+</section>

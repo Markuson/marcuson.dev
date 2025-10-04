@@ -4,9 +4,9 @@ marcuson.dev is a portfolio by an ex–industrial-automation engineer turned ful
 
 # 2) Who is this app for
 
-* Hiring managers and recruiters validating skills and history. **source:** user
-* Potential clients and collaborators in IoT, AI, and product teams. **source:** user
-* Maker and developer peers interested in electronics, robotics, and 3D printing. **source:** user
+- Hiring managers and recruiters validating skills and history. **source:** user
+- Potential clients and collaborators in IoT, AI, and product teams. **source:** user
+- Maker and developer peers interested in electronics, robotics, and 3D printing. **source:** user
 
 # 3) Functional Requirements
 
@@ -33,26 +33,26 @@ R-020. System theme toggle: follow OS by default with user override (light/dark)
 
 # 4) User Stories
 
-* As a hiring manager, I can scan skills and history, then download a CV PDF. **links:** R-002, R-005, R-014
-* As a collaborator, I can open live demos and repos for featured projects. **links:** R-006
-* As a visitor, I can contact via email or LinkedIn and see availability “Uppsala, Sweden • Open to new opportunities.” **links:** R-007
-* As a multilingual user, I get content in my browser language with a manual override. **links:** R-011
-* As the site owner, I can update content via Markdown in Astro Collections. **links:** R-013
-* As an accessibility-focused user, I can fully navigate with keyboard and screen readers. **links:** R-004
-* As a mobile user, I can use a collapsible menu and large tap targets. **links:** R-009
+- As a hiring manager, I can scan skills and history, then download a CV PDF. **links:** R-002, R-005, R-014
+- As a collaborator, I can open live demos and repos for featured projects. **links:** R-006
+- As a visitor, I can contact via email or LinkedIn and see availability “Uppsala, Sweden • Open to new opportunities.” **links:** R-007
+- As a multilingual user, I get content in my browser language with a manual override. **links:** R-011
+- As the site owner, I can update content via Markdown in Astro Collections. **links:** R-013
+- As an accessibility-focused user, I can fully navigate with keyboard and screen readers. **links:** R-004
+- As a mobile user, I can use a collapsible menu and large tap targets. **links:** R-009
 
 # 5) User Interface — high-level view
 
-* Sections: Hero, About, Featured Projects, Hobbies & Making, Contact. **links:** R-001–R-008
-* Global: dark theme, text logo, neutral accent TBD, consistent spacing, chips, cards. **links:** R-010
-* Nav: transparent at top, fade-in on scroll with glass background, sticky after reveal. **links:** R-019
-* States: hover, focus, active, tooltips. **links:** R-003
-* Responsive grids and breakpoints. **links:** R-009
-* i18n selector visible in navbar; auto-detect on first load; override persists. **links:** R-011
-* Theme toggle follows system with user override. **links:** R-020
+- Sections: Hero, About, Featured Projects, Hobbies & Making, Contact. **links:** R-001–R-008
+- Global: dark theme, text logo, neutral accent TBD, consistent spacing, chips, cards. **links:** R-010
+- Nav: transparent at top, fade-in on scroll with glass background, sticky after reveal. **links:** R-019
+- States: hover, focus, active, tooltips. **links:** R-003
+- Responsive grids and breakpoints. **links:** R-009
+- i18n selector visible in navbar; auto-detect on first load; override persists. **links:** R-011
+- Theme toggle follows system with user override. **links:** R-020
 
 Variables (TO COMPLETE where noted):
 
-* GitHub: `Markuson` • LinkedIn slug: `marc-uson` • Email: `hi@marcuson.dev`. **source:** PO
-* Location: Uppsala, Sweden. **source:** PO
-* GA4 Measurement ID: (TO COMPLETE). **source:** PO
+- GitHub: `Markuson` • LinkedIn slug: `marc-uson` • Email: `hi@marcuson.dev`. **source:** PO
+- Location: Uppsala, Sweden. **source:** PO
+- GA4 Measurement ID: (TO COMPLETE). **source:** PO

@@ -1,0 +1,17 @@
+---
+export interface Props {
+  as?: 'div' | 'section' | 'main' | 'article';
+  class?: string;
+  id?: string;
+}
+
+const { as: Element = 'div', class: className = '', id, ...props } = Astro.props;
+---
+
+<Element
+  class={`max-w-8xl mx-auto px-[8vw] sm:px-[12vw] lg:px-[15vw] ${className}`}
+  id={id}
+  {...props}
+>
+  <slot />
+</Element>

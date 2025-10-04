@@ -1,0 +1,138 @@
+---
+import Container from '@/components/layout/Container.astro';
+import SectionHeader from '@/components/data-display/SectionHeader.astro';
+import Chip from '@/components/data-display/Chip.astro';
+import Badge from '@/components/data-display/Badge.astro';
+import type { Language } from '@/utils/i18n';
+import { useTranslations } from '@/utils/i18n';
+import { getCollection } from 'astro:content';
+import Icon from '@/components/ui/Icon.astro';
+
+export interface Props {
+  lang: Language;
+}
+
+const { lang } = Astro.props;
+const t = useTranslations(lang);
+
+const localeProjects = await getCollection('projects', ({ data }) => data.lang === lang);
+const englishProjects = await getCollection('projects', ({ data }) => data.lang === 'en');
+
+const projectMap = new Map<string, (typeof localeProjects)[number]>();
+
+englishProjects.forEach((entry) => {
+  projectMap.set(entry.data.projectId, entry);
+});
+
+localeProjects.forEach((entry) => {
+  projectMap.set(entry.data.projectId, entry);
+});
+
+const projects = Array.from(projectMap.values()).sort((a, b) => a.data.order - b.data.order);
+
+const getStatusColor = (status: string) => {
+  const colors = {
+    'Featured': 'bg-accent-primary text-bg-primary',
+    'Live': 'bg-green-500 text-white',
+    'Open Source': 'bg-blue-500 text-white',
+    'Prototype': 'bg-yellow-500 text-bg-primary',
+    'In Development': 'bg-orange-500 text-white',
+    'Client Project': 'bg-purple-500 text-white',
+    'Private': 'bg-gray-500 text-white',
+  };
+  return colors[status as keyof typeof colors] || 'bg-gray-500 text-white';
+};
+---
+
+<section id="projects-section" class="py-20 lg:py-32 bg-bg-contrast">
+  <Container>
+    <SectionHeader
+      title={t('projects.title')}
+      subtitle={t('projects.subtitle')}
+      centered={true}
+      class="mb-16"
+    />
+
+    <!-- Projects Grid -->
+    <div class="grid md:grid-cols-2 xl:grid-cols-3 gap-8 mb-12" role="region" aria-label="Featured projects">
+      {projects.map(({ data: project }) => (
+        <article class="bg-bg-secondary rounded-lg p-6 transition-all duration-200 shadow-card hover:shadow-lg hover:-translate-y-1 border border-border-primary group flex flex-col h-full">
+          <!-- Badges -->
+          <div class="flex items-center gap-2 mb-4">
+            <Badge text={project.category} variant="default" />
+            <Badge text={project.status} variant="status" class={getStatusColor(project.status)} />
+          </div>
+
+          <!-- Title -->
+          <h3 class="text-card-title font-semibold text-text-primary mb-3">
+            {project.title}
+          </h3>
+
+          <!-- Description -->
+          <p class="text-text-secondary text-sm leading-relaxed mb-4">
+            {project.description}
+          </p>
+
+          <!-- Tech Stack -->
+          <div class="flex flex-wrap gap-1 mb-6" role="list" aria-label="Technologies used">
+            {project.tech.map((tech) => (
+              <Chip text={tech} />
+            ))}
+          </div>
+
+          <!-- Spacer to push buttons to bottom -->
+          <div class="flex-grow"></div>
+
+          <!-- Action Buttons -->
+          <div class="flex gap-3" role="group" aria-label="Project actions">
+            {project.codeUrl && (
+              <a
+                href={project.codeUrl}
+                target="_blank"
+                rel="noopener noreferrer"
+                class="flex-1 inline-flex items-center justify-center px-3 py-3 text-sm font-medium text-text-secondary hover:text-accent-primary border border-border-primary hover:border-accent-primary rounded transition-colors duration-200 focus:outline-none focus:ring-2 focus:ring-accent-primary focus:ring-offset-2 focus:ring-offset-bg-secondary min-h-[44px]"
+                aria-label={`View ${project.title} code`}
+              >
+                <Icon name="code" size="sm" class="mr-2" />
+                Code
+              </a>
+            )}
+
+            {project.demoUrl && (
+              <a
+                href={project.demoUrl}
+                target="_blank"
+                rel="noopener noreferrer"
+                class="flex-1 inline-flex items-center justify-center px-3 py-3 text-sm font-medium bg-accent-primary text-bg-primary hover:bg-accent-secondary rounded transition-colors duration-200 focus:outline-none focus:ring-2 focus:ring-accent-primary focus:ring-offset-2 focus:ring-offset-bg-secondary min-h-[44px]"
+                aria-label={`View ${project.title} demo`}
+              >
+                <Icon name="external-link" size="sm" class="mr-2" />
+                Demo
+              </a>
+            )}
+
+            {!project.codeUrl && (
+              <div class="flex-1 inline-flex items-center justify-center px-3 py-3 text-sm font-medium text-text-muted bg-bg-tertiary rounded cursor-not-allowed min-h-[44px]">
+                <Icon name="code" size="sm" class="mr-2" />
+                Private
+              </div>
+            )}
+          </div>
+        </article>
+      ))}
+    </div>
+
+    <!-- View All Projects CTA -->
+    <div class="text-center" role="region" aria-label="Additional projects">
+      <a
+        href="https://github.com/Markuson"
+        target="_blank"
+        rel="noopener noreferrer"
+        class="inline-flex items-center px-6 py-4 border-2 border-accent-primary text-accent-primary font-medium rounded-lg hover:bg-accent-primary hover:text-bg-primary transition-all duration-200 focus:outline-none focus:ring-2 focus:ring-accent-primary focus:ring-offset-2 focus:ring-offset-bg-primary min-h-[48px]"
+      >
+        <Icon name="arrow-circle-right" size="sm" class="mr-2" />
+        View All Projects on GitHub
+      </a>
+    </div>
+  </Container>
+</section>

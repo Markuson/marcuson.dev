@@ -1,0 +1,169 @@
+<svg viewBox="0 0 1200 800" xmlns="http://www.w3.org/2000/svg">
+  <defs>
+    <linearGradient id="bgGradient" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#0A0D11;stop-opacity:1" />
+      <stop offset="50%" style="stop-color:#10151B;stop-opacity:1" />
+      <stop offset="100%" style="stop-color:#0C1116;stop-opacity:1" />
+    </linearGradient>
+    <linearGradient id="codeGlow" x1="0%" y1="0%" x2="100%" y2="0%">
+      <stop offset="0%" style="stop-color:#28E07A;stop-opacity:0.8" />
+      <stop offset="50%" style="stop-color:#4CE590;stop-opacity:0.4" />
+      <stop offset="100%" style="stop-color:#28E07A;stop-opacity:0.1" />
+    </linearGradient>
+    <filter id="glow">
+      <feGaussianBlur stdDeviation="3" result="coloredBlur"/>
+      <feMerge>
+        <feMergeNode in="coloredBlur"/>
+        <feMergeNode in="SourceGraphic"/>
+      </feMerge>
+    </filter>
+  </defs>
+
+  <!-- Background -->
+  <rect width="1200" height="800" fill="url(#bgGradient)"/>
+
+  <!-- Code Editor Window -->
+  <g opacity="0.08">
+    <rect x="50" y="100" width="400" height="250" rx="8" fill="#172028" stroke="#2A3440" stroke-width="1"/>
+    <rect x="50" y="100" width="400" height="30" rx="8" fill="#1F2A35"/>
+    <circle cx="70" cy="115" r="5" fill="#FF5F56"/>
+    <circle cx="90" cy="115" r="5" fill="#FFBD2E"/>
+    <circle cx="110" cy="115" r="5" fill="#27CA3F"/>
+
+    <!-- Code lines -->
+    <g font-family="monospace" font-size="10" fill="#28E07A" opacity="0.6">
+      <text x="70" y="155">const developer = {</text>
+      <text x="85" y="175">name: 'Marc Uson',</text>
+      <text x="85" y="195">skills: ['React', 'AI', 'IoT'],</text>
+      <text x="85" y="215">passion: 'innovation'</text>
+      <text x="70" y="235">}</text>
+    </g>
+  </g>
+
+  <!-- Terminal Window -->
+  <g opacity="0.06">
+    <rect x="700" y="450" width="350" height="200" rx="8" fill="#0A0D11" stroke="#2A3440" stroke-width="1"/>
+    <rect x="700" y="450" width="350" height="25" rx="8" fill="#172028"/>
+    <text x="720" y="468" font-family="monospace" font-size="9" fill="#BDCADD">Terminal</text>
+
+    <!-- Terminal content -->
+    <g font-family="monospace" font-size="8" fill="#28E07A" opacity="0.7">
+      <text x="720" y="490">$ npm run build</text>
+      <text x="720" y="510">✓ Building for production...</text>
+      <text x="720" y="530">✓ Optimizing assets...</text>
+      <text x="720" y="550">✓ Build complete!</text>
+      <text x="720" y="580">$ git push origin main</text>
+      <text x="720" y="600">✓ Deployed successfully</text>
+      <rect x="715" y="615" width="8" height="12" fill="#28E07A" opacity="0.8"/>
+    </g>
+  </g>
+
+  <!-- Circuit Board Pattern -->
+  <g opacity="0.04" stroke="#28E07A" stroke-width="1" fill="none">
+    <!-- Main circuit paths -->
+    <path d="M200,300 L300,300 L300,400 L450,400 L450,350"/>
+    <path d="M500,200 L600,200 L600,300 L750,300"/>
+    <path d="M150,500 L250,500 L250,600 L400,600"/>
+
+    <!-- Circuit nodes -->
+    <circle cx="200" cy="300" r="4" fill="#28E07A"/>
+    <circle cx="300" cy="400" r="4" fill="#28E07A"/>
+    <circle cx="450" cy="350" r="4" fill="#28E07A"/>
+    <circle cx="600" cy="200" r="4" fill="#28E07A"/>
+    <circle cx="750" cy="300" r="4" fill="#28E07A"/>
+    <circle cx="250" cy="500" r="4" fill="#28E07A"/>
+
+    <!-- Circuit components -->
+    <rect x="290" y="390" width="20" height="20" fill="#172028" stroke="#28E07A"/>
+    <rect x="590" y="190" width="20" height="20" fill="#172028" stroke="#28E07A"/>
+    <rect x="240" y="490" width="20" height="20" fill="#172028" stroke="#28E07A"/>
+  </g>
+
+  <!-- Neural Network Nodes -->
+  <g opacity="0.05">
+    <!-- Layer 1 -->
+    <circle cx="900" cy="150" r="6" fill="#28E07A"/>
+    <circle cx="900" cy="200" r="6" fill="#28E07A"/>
+    <circle cx="900" cy="250" r="6" fill="#28E07A"/>
+
+    <!-- Layer 2 -->
+    <circle cx="980" cy="175" r="6" fill="#4CE590"/>
+    <circle cx="980" cy="225" r="6" fill="#4CE590"/>
+
+    <!-- Layer 3 -->
+    <circle cx="1060" cy="200" r="6" fill="#1CC367"/>
+
+    <!-- Connections -->
+    <g stroke="#28E07A" stroke-width="0.5" opacity="0.3">
+      <line x1="906" y1="150" x2="974" y2="175"/>
+      <line x1="906" y1="150" x2="974" y2="225"/>
+      <line x1="906" y1="200" x2="974" y2="175"/>
+      <line x1="906" y1="200" x2="974" y2="225"/>
+      <line x1="906" y1="250" x2="974" y2="175"/>
+      <line x1="906" y1="250" x2="974" y2="225"/>
+      <line x1="986" y1="175" x2="1054" y2="200"/>
+      <line x1="986" y1="225" x2="1054" y2="200"/>
+    </g>
+  </g>
+
+  <!-- API Data Flow -->
+  <g opacity="0.06" stroke="#28E07A" stroke-width="1.5" fill="none">
+    <path d="M100,700 Q200,650 300,700 T500,700" stroke-dasharray="5,5">
+      <animate attributeName="stroke-dashoffset" values="0;10" dur="2s" repeatCount="indefinite"/>
+    </path>
+    <path d="M800,100 Q900,50 1000,100 T1150,100" stroke-dasharray="3,3">
+      <animate attributeName="stroke-dashoffset" values="0;6" dur="1.5s" repeatCount="indefinite"/>
+    </path>
+
+    <!-- Data packets -->
+    <circle cx="150" cy="700" r="3" fill="#28E07A">
+      <animateMotion dur="3s" repeatCount="indefinite">
+        <mpath href="#dataPath1"/>
+      </animateMotion>
+    </circle>
+
+    <path id="dataPath1" d="M100,700 Q200,650 300,700 T500,700" opacity="0"/>
+  </g>
+
+  <!-- Code Brackets -->
+  <g opacity="0.03" stroke="#28E07A" stroke-width="2" fill="none">
+    <path d="M50,50 L30,50 L30,80 L50,80"/>
+    <path d="M1150,50 L1170,50 L1170,80 L1150,80"/>
+    <path d="M50,720 L30,720 L30,750 L50,750"/>
+    <path d="M1150,720 L1170,720 L1170,750 L1150,750"/>
+  </g>
+
+  <!-- Binary Rain -->
+  <g opacity="0.02" font-family="monospace" font-size="12" fill="#28E07A">
+    <text x="150" y="50">1010110</text>
+    <text x="350" y="80">0110101</text>
+    <text x="550" y="60">1101001</text>
+    <text x="750" y="70">0101110</text>
+    <text x="950" y="50">1110010</text>
+    <text x="200" y="750">1001101</text>
+    <text x="400" y="780">0111010</text>
+    <text x="600" y="770">1010101</text>
+    <text x="800" y="760">0110110</text>
+    <text x="1000" y="780">1101010</text>
+  </g>
+
+  <!-- Floating Tech Icons -->
+  <g opacity="0.04" fill="#28E07A">
+    <!-- Gear -->
+    <g transform="translate(400,150)">
+      <path d="M12,2C13.1,2 14,2.9 14,4C14,5.1 13.1,6 12,6C10.9,6 10,5.1 10,4C10,2.9 10.9,2 12,2M21,9V7L19.5,6.5C19.4,6.1 19.3,5.8 19.1,5.4L20.2,4.2L18.8,2.8L17.6,3.9C17.2,3.7 16.9,3.6 16.5,3.5L16,2H14L13.5,3.5C13.1,3.6 12.8,3.7 12.4,3.9L11.2,2.8L9.8,4.2L10.9,5.4C10.7,5.8 10.6,6.1 10.5,6.5L9,7V9L10.5,9.5C10.6,9.9 10.7,10.2 10.9,10.6L9.8,11.8L11.2,13.2L12.4,12.1C12.8,12.3 13.1,12.4 13.5,12.5L14,14H16L16.5,12.5C16.9,12.4 17.2,12.3 17.6,12.1L18.8,13.2L20.2,11.8L19.1,10.6C19.3,10.2 19.4,9.9 19.5,9.5L21,9Z" scale="0.5"/>
+    </g>
+
+    <!-- CPU -->
+    <rect x="800" y="350" width="20" height="20" fill="none" stroke="#28E07A" stroke-width="1"/>
+    <rect x="804" y="354" width="12" height="12" fill="#28E07A" opacity="0.3"/>
+    <g stroke="#28E07A" stroke-width="0.5">
+      <line x1="796" y1="356" x2="800" y2="356"/>
+      <line x1="796" y1="360" x2="800" y2="360"/>
+      <line x1="796" y1="364" x2="800" y2="364"/>
+      <line x1="820" y1="356" x2="824" y2="356"/>
+      <line x1="820" y1="360" x2="824" y2="360"/>
+      <line x1="820" y1="364" x2="824" y2="364"/>
+    </g>
+  </g>
+</svg>
