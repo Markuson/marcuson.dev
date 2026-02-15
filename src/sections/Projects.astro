@@ -46,17 +46,19 @@ const getStatusColor = (status: string) => {
 
 <section id="projects-section" class="py-20 lg:py-32 bg-bg-contrast">
   <Container>
-    <SectionHeader
-      title={t('projects.title')}
-      subtitle={t('projects.subtitle')}
-      centered={true}
-      class="mb-16"
-    />
+    <div class="animate-fade-in-up">
+      <SectionHeader
+        title={t('projects.title')}
+        subtitle={t('projects.subtitle')}
+        centered={true}
+        class="mb-16"
+      />
+    </div>
 
     <!-- Projects Grid -->
     <div class="grid md:grid-cols-2 xl:grid-cols-3 gap-8 mb-12" role="region" aria-label="Featured projects">
-      {projects.map(({ data: project }) => (
-        <article class="bg-bg-secondary rounded-lg p-6 transition-all duration-200 shadow-card hover:shadow-lg hover:-translate-y-1 border border-border-primary group flex flex-col h-full">
+      {projects.map(({ data: project }, index) => (
+        <article class={`bg-bg-secondary rounded-lg p-6 transition-all duration-300 shadow-card hover:shadow-lg border border-border-primary group flex flex-col h-full hover-lift animate-fade-in-up animation-delay-${Math.min((index + 2) * 100, 800)}`}>
           <!-- Badges -->
           <div class="flex items-center gap-2 mb-4">
             <Badge text={project.category} variant="default" />
@@ -123,12 +125,12 @@ const getStatusColor = (status: string) => {
     </div>
 
     <!-- View All Projects CTA -->
-    <div class="text-center" role="region" aria-label="Additional projects">
+    <div class="text-center animate-fade-in animation-delay-600" role="region" aria-label="Additional projects">
       <a
         href="https://github.com/Markuson"
         target="_blank"
         rel="noopener noreferrer"
-        class="inline-flex items-center px-6 py-4 border-2 border-accent-primary text-accent-primary font-medium rounded-lg hover:bg-accent-primary hover:text-bg-primary transition-all duration-200 focus:outline-none focus:ring-2 focus:ring-accent-primary focus:ring-offset-2 focus:ring-offset-bg-primary min-h-[48px]"
+        class="inline-flex items-center px-6 py-4 border-2 border-accent-primary text-accent-primary font-medium rounded-lg hover:bg-accent-primary hover:text-bg-primary transition-all duration-300 focus:outline-none focus:ring-2 focus:ring-accent-primary focus:ring-offset-2 focus:ring-offset-bg-primary min-h-[48px] hover:scale-105"
       >
         <Icon name="arrow-circle-right" size="sm" class="mr-2" />
         View All Projects on GitHub

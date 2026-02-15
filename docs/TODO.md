@@ -23,12 +23,13 @@
 - [x] Add navbar scroll behavior (fade-in with glass background)
 - [x] Implement responsive design for mobile, tablet, and desktop
 - [x] Add accessibility features (ARIA labels, keyboard navigation, focus states)
+- [x] Implement animations for all sections (fade-in, slide-in, stagger effects)
 - [ ] ~~Implement theme toggle with system preference detection~~ (ON HOLD)
 
 ## Deployment & Infrastructure
 
 - [x] Create Edge Middleware for language detection and redirection
-- [ ] Add placeholder CV PDF and configure download functionality _(requires PO CV PDF)_
+- [x] Add placeholder CV PDF and configure download functionality _(requires PO CV PDF)_
 - [x] Implement SEO meta tags, Open Graph, and sitemap generation
 - [x] Configure Vercel deployment with proper redirects and caching
 
@@ -37,10 +38,12 @@
 - [x] Set up Lighthouse CI with performance budgets
 - [x] Add performance optimizations (lazy loading, image optimization, code splitting)
 - [x] Add security headers and Content Security Policy
+- [x] Add CSS animations and smooth transitions for enhanced UX
 
 ## Required Assets from PO
 
-- [ ] Actual CV PDF (`/assets/cv/marcuson.pdf`)
+- [x] Placeholder CV PDF created for testing (`/assets/cv/marcuson.pdf`)
+- [ ] Actual CV PDF from PO (to replace placeholder)
 - [x] Hero background SVG (isometric tech illustration)
 - [ ] Professional headshot/profile image
 - [x] Project screenshots/mockups for portfolio

@@ -27,16 +27,16 @@ const iconMap: Record<string, IconName> = {
 
 const primaryActionClasses = {
   primary:
-    'inline-flex items-center justify-center w-full px-4 py-3 bg-accent-primary text-bg-primary font-medium rounded hover:bg-accent-secondary transition-colors duration-200 focus:outline-none focus:ring-2 focus:ring-accent-primary focus:ring-offset-2 focus:ring-offset-bg-secondary min-h-[44px]',
+    'inline-flex items-center justify-center w-full px-4 py-3 bg-accent-primary text-bg-primary font-medium rounded hover:bg-accent-secondary transition-all duration-300 hover:scale-105 focus:outline-none focus:ring-2 focus:ring-accent-primary focus:ring-offset-2 focus:ring-offset-bg-secondary min-h-[44px]',
   outline:
-    'inline-flex items-center justify-center w-full px-4 py-3 border border-accent-primary text-accent-primary font-medium rounded hover:bg-accent-primary hover:text-bg-primary transition-colors duration-200 focus:outline-none focus:ring-2 focus:ring-accent-primary focus:ring-offset-2 focus:ring-offset-bg-secondary min-h-[44px]',
+    'inline-flex items-center justify-center w-full px-4 py-3 border border-accent-primary text-accent-primary font-medium rounded hover:bg-accent-primary hover:text-bg-primary transition-all duration-300 hover:scale-105 focus:outline-none focus:ring-2 focus:ring-accent-primary focus:ring-offset-2 focus:ring-offset-bg-secondary min-h-[44px]',
 };
 
 const secondaryActionClasses = {
   primary:
-    'inline-flex items-center px-6 py-4 bg-accent-primary text-bg-primary font-medium rounded hover:bg-accent-secondary transition-colors duration-200 focus:outline-none focus:ring-2 focus:ring-accent-primary focus:ring-offset-2 focus:ring-offset-bg-secondary min-h-[48px]',
+    'inline-flex items-center px-6 py-4 bg-accent-primary text-bg-primary font-medium rounded hover:bg-accent-secondary transition-all duration-300 hover:scale-105 focus:outline-none focus:ring-2 focus:ring-accent-primary focus:ring-offset-2 focus:ring-offset-bg-secondary min-h-[48px]',
   outline:
-    'inline-flex items-center px-6 py-4 border border-accent-primary text-accent-primary font-medium rounded hover:bg-accent-primary hover:text-bg-primary transition-colors duration-200 focus:outline-none focus:ring-2 focus:ring-accent-primary focus:ring-offset-2 focus:ring-offset-bg-secondary min-h-[48px]',
+    'inline-flex items-center px-6 py-4 border border-accent-primary text-accent-primary font-medium rounded hover:bg-accent-primary hover:text-bg-primary transition-all duration-300 hover:scale-105 focus:outline-none focus:ring-2 focus:ring-accent-primary focus:ring-offset-2 focus:ring-offset-bg-secondary min-h-[48px]',
 };
 
 const statusColors = {
@@ -54,19 +54,21 @@ const shouldOpenNewTab = (href: string) => href.startsWith('http');
 
 <section id="contact-section" class="py-20 lg:py-32 bg-bg-contrast">
   <Container>
-    <SectionHeader
-      title={contact?.title ?? 'Let\'s Work Together'}
-      subtitle={contact?.subtitle}
-      centered={true}
-      class="mb-16"
-    />
+    <div class="animate-fade-in-up">
+      <SectionHeader
+        title={contact?.title ?? 'Let\'s Work Together'}
+        subtitle={contact?.subtitle ?? ''}
+        centered={true}
+        class="mb-16"
+      />
+    </div>
 
     {primaryCards.length > 0 && (
       <div class="grid md:grid-cols-3 gap-6 mb-8 mx-[10%]" role="region" aria-label="Contact methods">
-        {primaryCards.map((card) => (
-          <article class="bg-bg-secondary rounded-lg p-6 text-center transition-all duration-200 shadow-card hover:shadow-lg hover:-translate-y-1 border border-border-primary">
+        {primaryCards.map((card, index) => (
+          <article class={`bg-bg-secondary rounded-lg p-6 text-center transition-all duration-300 shadow-card hover:shadow-lg border border-border-primary hover-lift animate-fade-in-up animation-delay-${(index + 2) * 100}`}>
             <div class="inline-flex items-center justify-center w-12 h-12 bg-bg-tertiary rounded-full text-accent-primary mb-4">
-              <Icon name={iconMap[card.id] ?? iconMap.email} />
+              <Icon name={(card.id && iconMap[card.id]) || iconMap.email} />
             </div>
             <h3 class="text-lg font-semibold text-text-primary mb-2">{card.title}</h3>
             <p class="text-text-secondary text-sm mb-4">{card.value}</p>
@@ -85,11 +87,11 @@ const shouldOpenNewTab = (href: string) => href.startsWith('http');
 
     {secondaryCards.length > 0 && (
       <div class="grid md:grid-cols-2 gap-6 mb-12 mx-[10%]" role="region" aria-label="Collaboration opportunities">
-        {secondaryCards.map((card) => (
-          <article class="bg-bg-secondary rounded-lg p-8 transition-all duration-200 shadow-card hover:shadow-lg hover:-translate-y-1 border border-border-primary">
+        {secondaryCards.map((card, index) => (
+          <article class={`bg-bg-secondary rounded-lg p-8 transition-all duration-300 shadow-card hover:shadow-lg border border-border-primary hover-lift animate-fade-in-up animation-delay-${(index + 5) * 100}`}>
             <div class="flex items-start">
               <div class="inline-flex items-center justify-center w-12 h-12 bg-bg-tertiary rounded-full text-accent-primary mr-4 flex-shrink-0">
-                <Icon name={iconMap[card.id] ?? iconMap.project} />
+                <Icon name={(card.id && iconMap[card.id]) || iconMap.project} />
               </div>
               <div class="flex-1">
                 <h3 class="text-xl font-semibold text-text-primary mb-3">{card.title}</h3>
@@ -112,9 +114,9 @@ const shouldOpenNewTab = (href: string) => href.startsWith('http');
     )}
 
     {status && (
-      <section class="border border-border-primary rounded-lg p-8 text-center mx-[10%]" aria-labelledby="status-heading">
+      <section class="border border-border-primary rounded-lg p-8 text-center mx-[10%] hover-glow animate-fade-in-up animation-delay-700" aria-labelledby="status-heading">
           <div class="inline-flex items-center justify-center mb-6">
-            <Icon name={iconMap.location} size="xl" class="text-accent-primary" />
+            <Icon name={iconMap.location as IconName} size="xl" class="text-accent-primary" />
           </div>
 
           <h3 class="text-3xl font-bold text-text-primary mb-4" id="status-heading">

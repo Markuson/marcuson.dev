@@ -32,21 +32,23 @@ const iconMap: Record<string, IconName> = {
 
 <section id="hobbies-section" class="py-20 lg:py-32 bg-bg-primary">
   <Container>
-    <SectionHeader
-      title={t('hobbies.title')}
-      subtitle={t('hobbies.subtitle')}
-      centered={true}
-      class="mb-16"
-    />
+    <div class="animate-fade-in-up">
+      <SectionHeader
+        title={t('hobbies.title')}
+        subtitle={t('hobbies.subtitle')}
+        centered={true}
+        class="mb-16"
+      />
+    </div>
 
     <!-- Hobbies Grid -->
     <div class="grid md:grid-cols-2 gap-8 mb-16" role="region" aria-label="Hobbies and making projects">
-      {hobbies.map(({ data: hobby }) => (
-        <article class="bg-bg-secondary rounded-lg p-6 shadow-card border border-border-primary">
+      {hobbies.map(({ data: hobby }, index) => (
+        <article class={`bg-bg-secondary rounded-lg p-6 shadow-card border border-border-primary hover-lift animate-fade-in-up animation-delay-${(index + 2) * 100}`}>
           <!-- Icon and Title -->
           <div class="flex items-center mb-6">
             <div class="inline-flex items-center justify-center w-12 h-12 text-accent-primary mr-4">
-              <Icon name={iconMap[hobby.icon ?? 'printing'] ?? iconMap.printing} size="xl" />
+              <Icon name={(hobby.icon && iconMap[hobby.icon]) || iconMap.printing} size="xl" />
             </div>
             <h3 class="text-xl font-semibold text-text-primary">
               {hobby.title}
@@ -89,7 +91,7 @@ const iconMap: Record<string, IconName> = {
     </div>
 
     <!-- Collaboration Banner -->
-    <section class="border border-gray-700 rounded-lg p-8 text-center" aria-labelledby="collaboration-heading">
+    <section class="border border-gray-700 rounded-lg p-8 text-center hover-glow animate-fade-in-up animation-delay-400" aria-labelledby="collaboration-heading">
         <div class="inline-flex items-center justify-center mb-6">
           <Icon name="users" size="xl" class="text-accent-primary" />
         </div>
