@@ -24,10 +24,9 @@ Thumbs.db
 .git
 .gitignore
 
-# Documentation and development files
+# Documentation and development files (not needed in production)
 docs/
 README.md
-*.md
 !robots.txt
 
 # Test files

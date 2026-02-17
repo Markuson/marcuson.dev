@@ -17,8 +17,6 @@ const navLinks = [
   { href: '#hobbies-section', label: t('nav.hobbies') },
   { href: '#contact-section', label: t('nav.contact') },
 ];
-
-const isActive = (href: string) => currentPath === href;
 ---
 
 <nav
@@ -46,16 +44,12 @@ const isActive = (href: string) => currentPath === href;
             navLinks.map(({ href, label }) => (
               <a
                 href={href}
-                class={`text-text-secondary hover:text-text-primary transition-colors duration-200 font-medium relative focus:outline-none focus:ring-2 focus:ring-accent-primary focus:ring-offset-2 focus:ring-offset-bg-primary ${
-                  isActive(href) ? 'text-accent-primary' : ''
-                }`}
-                aria-current={isActive(href) ? 'page' : undefined}
+                data-section={href}
+                class="nav-link text-text-secondary hover:text-accent-primary transition-all duration-300 font-medium relative py-2 focus:outline-none focus-visible:ring-2 focus-visible:ring-accent-primary focus-visible:ring-offset-2 focus-visible:ring-offset-bg-primary"
                 onclick={`event.preventDefault(); document.querySelector('${href}')?.scrollIntoView({ behavior: 'smooth' })`}
               >
                 {label}
-                {isActive(href) && (
-                  <span class="absolute -bottom-1 left-0 right-0 h-0.5 bg-accent-primary rounded-full" />
-                )}
+                <span class="nav-underline absolute bottom-0 left-0 w-full h-0.5 bg-accent-primary transform origin-left transition-transform duration-300 ease-out scale-x-0 rounded-full" />
               </a>
             ))
           }
@@ -127,10 +121,8 @@ const isActive = (href: string) => currentPath === href;
         navLinks.map(({ href, label }) => (
           <a
             href={href}
-            class={`block text-text-secondary hover:text-text-primary transition-colors duration-200 font-medium py-2 focus:outline-none focus:ring-2 focus:ring-accent-primary focus:ring-offset-2 focus:ring-offset-bg-secondary ${
-              isActive(href) ? 'text-accent-primary' : ''
-            }`}
-            aria-current={isActive(href) ? 'page' : undefined}
+            data-section={href}
+            class="mobile-nav-link block text-text-secondary hover:text-accent-primary transition-all duration-300 font-medium py-3 px-4 rounded-lg focus:outline-none focus:ring-2 focus:ring-accent-primary focus:ring-offset-2 focus:ring-offset-bg-secondary relative hover:bg-bg-tertiary"
             onclick={`event.preventDefault(); document.querySelector('${href}')?.scrollIntoView({ behavior: 'smooth' }); document.getElementById('mobile-menu').style.display = 'none'`}
           >
             {label}
@@ -241,14 +233,24 @@ const isActive = (href: string) => currentPath === href;
     });
   }
 
-  // Navigation scroll behavior
+  // Navigation scroll behavior and active section detection
   const nav = document.getElementById('main-nav');
+  const navLinks = document.querySelectorAll('.nav-link');
+  const mobileNavLinks = document.querySelectorAll('.mobile-nav-link');
+  
+  const sections = Array.from(navLinks).map(link => {
+    const href = link.getAttribute('data-section');
+    return href ? document.querySelector(href) : null;
+  }).filter(Boolean) as HTMLElement[];
+
+  let isScrolling = false;
+  let scrollTimeout: number | null = null;
 
   function updateNavigation() {
     const currentScrollY = window.scrollY;
 
+    // Update glass background
     if (currentScrollY > 16) {
-      // Add glass background when scrolled
       nav?.classList.add(
         'bg-gray-800/30',
         'backdrop-blur-sm',
@@ -257,7 +259,6 @@ const isActive = (href: string) => currentPath === href;
         'shadow-lg'
       );
     } else {
-      // Remove glass background at top
       nav?.classList.remove(
         'bg-gray-800/30',
         'backdrop-blur-sm',
@@ -266,7 +267,137 @@ const isActive = (href: string) => currentPath === href;
         'shadow-lg'
       );
     }
+
+    // Only update active section if not programmatically scrolling
+    if (!isScrolling) {
+      updateActiveSection();
+    }
   }
+
+  function updateActiveSection() {
+    const currentScrollY = window.scrollY;
+    let currentSection = '';
+    const scrollPosition = currentScrollY + 100; // Offset for better detection
+
+    sections.forEach(section => {
+      const sectionTop = section.offsetTop;
+      const sectionHeight = section.offsetHeight;
+      
+      if (scrollPosition >= sectionTop && scrollPosition < sectionTop + sectionHeight) {
+        currentSection = `#${section.id}`;
+      }
+    });
+
+    // Update desktop nav links
+    navLinks.forEach(link => {
+      const href = link.getAttribute('data-section');
+      if (href === currentSection) {
+        link.classList.add('text-accent-primary');
+        link.classList.remove('text-text-secondary');
+        link.setAttribute('aria-current', 'page');
+        // Add active underline
+        const underline = link.querySelector('.nav-underline');
+        if (underline) {
+          underline.classList.remove('scale-x-0');
+          underline.classList.add('scale-x-100');
+        }
+      } else {
+        link.classList.remove('text-accent-primary');
+        link.classList.add('text-text-secondary');
+        link.removeAttribute('aria-current');
+        // Remove active underline
+        const underline = link.querySelector('.nav-underline');
+        if (underline) {
+          underline.classList.add('scale-x-0');
+          underline.classList.remove('scale-x-100');
+        }
+      }
+    });
+
+    // Update mobile nav links
+    mobileNavLinks.forEach(link => {
+      const href = link.getAttribute('data-section');
+      if (href === currentSection) {
+        link.classList.add('text-accent-primary', 'bg-accent-primary/10', 'border-l-2', 'border-accent-primary');
+        link.classList.remove('text-text-secondary');
+        link.setAttribute('aria-current', 'page');
+      } else {
+        link.classList.remove('text-accent-primary', 'bg-accent-primary/10', 'border-l-2', 'border-accent-primary');
+        link.classList.add('text-text-secondary');
+        link.removeAttribute('aria-current');
+      }
+    });
+  }
+
+  // Handle programmatic scrolling (when clicking nav links)
+  navLinks.forEach(link => {
+    link.addEventListener('click', (e) => {
+      isScrolling = true;
+      const targetSection = link.getAttribute('data-section');
+      
+      // Immediately clear all active states
+      navLinks.forEach(navLink => {
+        navLink.classList.remove('text-accent-primary');
+        navLink.classList.add('text-text-secondary');
+        navLink.removeAttribute('aria-current');
+        const underline = navLink.querySelector('.nav-underline');
+        if (underline) {
+          underline.classList.add('scale-x-0');
+          underline.classList.remove('scale-x-100');
+        }
+      });
+      
+      // Set the clicked link as active immediately
+      link.classList.add('text-accent-primary');
+      link.classList.remove('text-text-secondary');
+      link.setAttribute('aria-current', 'page');
+      const underline = link.querySelector('.nav-underline');
+      if (underline) {
+        underline.classList.remove('scale-x-0');
+        underline.classList.add('scale-x-100');
+      }
+      
+      // Clear any existing timeout
+      if (scrollTimeout !== null) {
+        clearTimeout(scrollTimeout);
+      }
+      
+      // Wait for scroll to complete before re-enabling active section updates
+      scrollTimeout = window.setTimeout(() => {
+        isScrolling = false;
+        updateActiveSection();
+        scrollTimeout = null;
+      }, 1500); // Wait 1.5 seconds for smooth scroll to complete
+    });
+  });
+
+  mobileNavLinks.forEach(link => {
+    link.addEventListener('click', () => {
+      isScrolling = true;
+      
+      // Immediately clear all active states
+      mobileNavLinks.forEach(navLink => {
+        navLink.classList.remove('text-accent-primary', 'bg-accent-primary/10', 'border-l-2', 'border-accent-primary');
+        navLink.classList.add('text-text-secondary');
+        navLink.removeAttribute('aria-current');
+      });
+      
+      // Set the clicked link as active immediately
+      link.classList.add('text-accent-primary', 'bg-accent-primary/10', 'border-l-2', 'border-accent-primary');
+      link.classList.remove('text-text-secondary');
+      link.setAttribute('aria-current', 'page');
+      
+      if (scrollTimeout !== null) {
+        clearTimeout(scrollTimeout);
+      }
+      
+      scrollTimeout = window.setTimeout(() => {
+        isScrolling = false;
+        updateActiveSection();
+        scrollTimeout = null;
+      }, 1500);
+    });
+  });
 
   // Initialize and listen for scroll
   updateNavigation();
